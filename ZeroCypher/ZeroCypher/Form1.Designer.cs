@@ -237,6 +237,7 @@
             this.btnEncrypt.TabIndex = 4;
             this.btnEncrypt.Text = "Encrypt";
             this.btnEncrypt.UseVisualStyleBackColor = true;
+            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
             // cobEncryptionType
             // 
@@ -280,6 +281,7 @@
             this.brnDecryption.TabIndex = 11;
             this.brnDecryption.Text = "Decryption";
             this.brnDecryption.UseVisualStyleBackColor = true;
+            this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
             // 
             // label7
             // 
