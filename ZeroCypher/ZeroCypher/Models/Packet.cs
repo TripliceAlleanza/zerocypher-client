@@ -57,10 +57,12 @@ namespace ZeroCypher.Models {
         public static bool operator !=(Packet packet1, Packet packet2) {
             return !(packet1 == packet2);
         }
-        
-        public static string Serialize(Packet pak) {
-            return JsonConvert.SerializeObject(pak);
 
+        public static string Serialize(Packet pak, bool indent) {
+            if (indent)
+                return JsonConvert.SerializeObject(pak, Formatting.Indented);
+            else
+                return JsonConvert.SerializeObject(pak, Formatting.None);
         }
         public static Packet Dserialize(string pak) {
             return JsonConvert.DeserializeObject<Packet>(pak);
