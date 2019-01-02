@@ -85,5 +85,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandParser\CommandParser.csproj">
+      <Project>{bc6c5b22-af14-47c7-b6ef-c31d5ba5d916}</Project>
+      <Name>CommandParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

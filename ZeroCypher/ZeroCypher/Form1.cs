@@ -11,13 +11,15 @@ using System.IO.Ports;
 using ZeroCypher.Models;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Linq;
+using CommandParser.Interface;
 
 namespace ZeroCypher {
     public partial class frmMain : Form {
         private SerialPort Serial = new SerialPort();
         private StringBuilder buffer = new StringBuilder();
         private List<Packet> OutputBuffer = new List<Packet>();
-        JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket)); 
+        JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
+        ICommandParser Parser;
 
         public frmMain() {
             InitializeComponent();
@@ -129,6 +131,18 @@ namespace ZeroCypher {
             catch (Exception)
             {
                 MessageBox.Show("Select a value in the Combobox", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void txtConsole_KeyDown(object sender, KeyEventArgs e) {
+            switch (e.KeyCode) {
+                case Keys.Enter:
+                    
+                    break;
+                case Keys.OemQuestion:
+                    Parser.MoreInformation(Delegate.CreateDelegate((Control)txtConsole));
+                    break;
             }
         }
     }
