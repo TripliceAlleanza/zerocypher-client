@@ -22,10 +22,18 @@ namespace CommandParser.Parser {
                     break;
                 case "SerialInfo":
                     break;
+                case "?":
+                case "Help":
+                    Help();
+                    break;
                 default:
                     Write($"'{values[0]}' is an invalid command");
                     break;
             }
+        }
+
+        private void Help() {
+            throw new NotImplementedException();
         }
 
         public string MoreInformation(Delegate textbox) {

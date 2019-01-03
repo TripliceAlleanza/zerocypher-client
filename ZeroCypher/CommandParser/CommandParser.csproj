@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Interface\ICommandParser.cs" />
     <Compile Include="Parser\CommandParser.cs" />
+    <Compile Include="Parser\Models\Command.cs" />
     <Compile Include="Parser\Models\Delegates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
