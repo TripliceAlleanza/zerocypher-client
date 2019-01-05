@@ -23,7 +23,6 @@
         /// il contenuto del metodo con l'editor di codice.
         /// </summary>
         private void InitializeComponent() {
-            this.TreeView = new System.Windows.Forms.TreeView();
             this.btnOpen = new System.Windows.Forms.Button();
             this.lblFileName = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
@@ -32,21 +31,15 @@
             this.rdbCreateCommandArg = new System.Windows.Forms.RadioButton();
             this.btnDelete = new System.Windows.Forms.Button();
             this.grbInput = new System.Windows.Forms.GroupBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.lblDescription = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.TxtDescription = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.btnSaveFile = new System.Windows.Forms.Button();
+            this.TreeView = new System.Windows.Forms.TreeView();
             this.grbInput.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TreeView
-            // 
-            this.TreeView.Location = new System.Drawing.Point(12, 80);
-            this.TreeView.Name = "TreeView";
-            this.TreeView.Size = new System.Drawing.Size(335, 346);
-            this.TreeView.TabIndex = 0;
             // 
             // btnOpen
             // 
@@ -56,6 +49,7 @@
             this.btnOpen.TabIndex = 1;
             this.btnOpen.Text = "Open File";
             this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // lblFileName
             // 
@@ -118,6 +112,7 @@
             this.btnDelete.TabIndex = 12;
             this.btnDelete.Text = "Delete selected node";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // grbInput
             // 
@@ -137,23 +132,19 @@
             this.grbInput.TabStop = false;
             this.grbInput.Text = "1";
             // 
-            // lblName
+            // TxtDescription
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(22, 150);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(85, 13);
-            this.lblName.TabIndex = 0;
-            this.lblName.Text = "Command Name";
+            this.TxtDescription.Location = new System.Drawing.Point(25, 246);
+            this.TxtDescription.Name = "TxtDescription";
+            this.TxtDescription.Size = new System.Drawing.Size(382, 20);
+            this.TxtDescription.TabIndex = 4;
             // 
-            // lblInfo
+            // txtName
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(22, 103);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(326, 13);
-            this.lblInfo.TabIndex = 1;
-            this.lblInfo.Text = "Select the command name to which the argument should be added ";
+            this.txtName.Location = new System.Drawing.Point(25, 167);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(382, 20);
+            this.txtName.TabIndex = 3;
             // 
             // lblDescription
             // 
@@ -164,19 +155,23 @@
             this.lblDescription.TabIndex = 2;
             this.lblDescription.Text = "Command Description";
             // 
-            // txtName
+            // lblInfo
             // 
-            this.txtName.Location = new System.Drawing.Point(25, 167);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(382, 20);
-            this.txtName.TabIndex = 3;
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(22, 103);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(326, 13);
+            this.lblInfo.TabIndex = 1;
+            this.lblInfo.Text = "Select the command name to which the argument should be added ";
             // 
-            // TxtDescription
+            // lblName
             // 
-            this.TxtDescription.Location = new System.Drawing.Point(25, 246);
-            this.TxtDescription.Name = "TxtDescription";
-            this.TxtDescription.Size = new System.Drawing.Size(382, 20);
-            this.TxtDescription.TabIndex = 4;
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(22, 150);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(85, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Command Name";
             // 
             // btnSaveFile
             // 
@@ -186,6 +181,15 @@
             this.btnSaveFile.TabIndex = 14;
             this.btnSaveFile.Text = "Save Current File";
             this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
+            // 
+            // TreeView
+            // 
+            this.TreeView.HideSelection = false;
+            this.TreeView.Location = new System.Drawing.Point(12, 80);
+            this.TreeView.Name = "TreeView";
+            this.TreeView.Size = new System.Drawing.Size(335, 346);
+            this.TreeView.TabIndex = 0;
             // 
             // frmMain
             // 
@@ -209,8 +213,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TreeView TreeView;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label lblFileName;
         private System.Windows.Forms.Button btnNew;
@@ -225,6 +227,7 @@
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnSaveFile;
+        private System.Windows.Forms.TreeView TreeView;
     }
 }
 

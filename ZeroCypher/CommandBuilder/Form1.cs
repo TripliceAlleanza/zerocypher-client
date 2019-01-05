@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using CommandParser.Parser.Models;
+using Newtonsoft.Json;
 
 namespace CommandBuilder {
     public partial class frmMain : Form {
-        List<Command> CommandList = new List<Command>();
+        List<Command> CommandList;
         public frmMain() {
             InitializeComponent();
         }
 
         private void frmMain_Load(object sender, EventArgs e) {
+             CommandList = new List<Command>();
             rdbCreateCommand.Checked = true;
             lblInfo.Visible = false;
             grbInput.Visible = false;
@@ -51,6 +47,7 @@ namespace CommandBuilder {
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
+            //adding a command to the tree and to the list
             if (rdbCreateCommand.Checked) {
                 if(!String.IsNullOrWhiteSpace(txtName.Text) && !String.IsNullOrWhiteSpace(TxtDescription.Text)) {
                     string CommandName= txtName.Text;
@@ -63,17 +60,81 @@ namespace CommandBuilder {
                 }
 
             }
+            //adding a argument to a command
             if (rdbCreateCommandArg.Checked) {
-
-                if (!String.IsNullOrWhiteSpace(txtName.Text) && !String.IsNullOrWhiteSpace(TxtDescription.Text)) {
-                    string CommandName = txtName.Text;
-                    if (CommandList.Find(x => x.Name == CommandName) == null) {
-                        Command Comm = new Command(CommandName, TxtDescription.Text);
-                        TreeView.Nodes.Add(CommandName);
-                        CommandList.Add(Comm);
-                        MessageBox.Show("Command has been added");
+                try {
+                    if (TreeView.SelectedNode.Parent == null
+                        && !String.IsNullOrWhiteSpace(txtName.Text)
+                        && !String.IsNullOrWhiteSpace(TxtDescription.Text)) {
+                        string CommandName = TreeView.SelectedNode.Text;
+                        string ArgName = txtName.Text;
+                        var CommandIndex = CommandList.FindIndex(x => x.Name == CommandName);
+                        if (CommandIndex != -1) {
+                            var ArgSearch = CommandList[CommandIndex].ExplicitArguments.Find(y => y.Name == ArgName);
+                            if (ArgSearch == null) {
+                                Command arg = new Command(txtName.Text, TxtDescription.Text);
+                                TreeView.SelectedNode.Nodes.Add(txtName.Text);
+                                CommandList[CommandIndex].ExplicitArguments.Add(arg);
+                                MessageBox.Show("Command has been added");
+                            }
+                        }
                     }
                 }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e) {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "txt files (*.txt)|*.json";
+            openFile.FilterIndex = 1;
+            openFile.CheckFileExists = true;
+            openFile.CheckPathExists = true;
+            if (openFile.ShowDialog() == DialogResult.OK) // Test result.
+            {
+               
+                string Json = File.ReadAllText(openFile.FileName);
+                if (Json != "") {
+                    AddToTreeView(Json);
+                    lblFileName.Text = openFile.FileName;
+                    grbInput.Visible = true;
+                }
+            }          
+        }
+        private void AddToTreeView(string Json) {
+            CommandList.Clear();
+            TreeView.Nodes.Clear();
+            CommandList = JsonConvert.DeserializeObject<List<Command>>(Json);
+            if (CommandList != null) {
+                foreach (var command in CommandList) {
+                    List<TreeNode> args = new List<TreeNode>();
+                    foreach (var arg in command.ExplicitArguments) {
+                        args.Add(new TreeNode(arg.Name));
+                    }
+                    TreeView.Nodes.Add(new TreeNode(command.Name, args.ToArray()));
+                }
+
+            }
+        }
+
+        private void btnSaveFile_Click(object sender, EventArgs e) {
+            File.WriteAllText(lblFileName.Text, JsonConvert.SerializeObject(CommandList));
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) {
+            //delete rootnode
+            if (TreeView.SelectedNode.Parent == null) {
+                string CommandName = TreeView.SelectedNode.Text;
+                CommandList.RemoveAt(CommandList.FindIndex(x => x.Name == CommandName));
+                TreeView.SelectedNode.Remove();
+            }
+            else {
+                string ArgName = TreeView.SelectedNode.Text;
+                int commandIndex = CommandList.FindIndex(x => x.Name == TreeView.SelectedNode.Parent.Text);
+                CommandList[commandIndex].ExplicitArguments.RemoveAt(CommandList[commandIndex].ExplicitArguments.FindIndex(x => x.Name == ArgName));
+                TreeView.SelectedNode.Remove();
             }
         }
     }

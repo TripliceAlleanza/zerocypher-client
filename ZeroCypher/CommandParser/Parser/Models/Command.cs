@@ -10,17 +10,20 @@ namespace CommandParser.Parser.Models {
         public string description { get; set; }
         public List<Command> ExplicitArguments { get; set; }
         public Command() {
+            ExplicitArguments = new List<Command>();
         }
 
         public Command(string name, string description) {
             Name = name;
             this.description = description;
+            ExplicitArguments = new List<Command>();
         }
 
         public Command(string name, string description, List<Command> explicitArguments) {
             Name = name;
             this.description = description;
             ExplicitArguments = explicitArguments;
+            ExplicitArguments = new List<Command>();
         }
 
     }
