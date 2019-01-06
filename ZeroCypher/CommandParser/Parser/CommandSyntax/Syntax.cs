@@ -62,6 +62,12 @@ namespace CommandParser.Parser.CommandSyntax {
                     return result.ToString() + $"{name}: has no arguments\n";
             }
         }
-
+        public string AllCommandsDescription() {
+            StringBuilder result = new StringBuilder(40);
+            foreach (var comm in _commands) {
+                result.Append($"{comm.Name}: {comm.Description}\n");
+            }
+            return result.ToString();
+        }
     }
 }

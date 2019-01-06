@@ -27,10 +27,10 @@ namespace CommandParser.Parser {
 
             if (BuiltInCommands.SearchCommand(values[0])) {
                 MethodInfo CommandRoutine = typeof(CommandAnalyser).GetMethod(values[0], BindingFlags.NonPublic | BindingFlags.Instance);
-                CommandRoutine.Invoke(this,new object[] { command});
+                CommandRoutine.Invoke(this,new object[] { values});
             }
             else {
-                Write("Invalid Command\n");
+                WriteInvalidCommand();
             }
 
 
@@ -55,8 +55,12 @@ namespace CommandParser.Parser {
             #endregion
         }
 
-        private void Help(string com) { 
-            TESTING = true;
+        private void Help(string[] comm) {
+            if (comm.GetUpperBound(0) > 0) {
+                WriteInvalidArgument();
+            }
+            else
+                Write(BuiltInCommands.AllCommandsDescription());
         }
 
         public string MoreInformation(Delegate textbox) {
@@ -64,6 +68,12 @@ namespace CommandParser.Parser {
         }
         private void SerialOpen() {
 
+        }
+        private void WriteInvalidArgument() {
+            Write("Invalid Argument\n");
+        }
+        private void WriteInvalidCommand() {
+            Write("Invalid Argument\n");
         }
     }
 }
