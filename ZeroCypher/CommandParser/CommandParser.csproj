@@ -46,6 +46,11 @@
   <ItemGroup>
     <Compile Include="Interface\ICommandParser.cs" />
     <Compile Include="Parser\CommandParser.cs" />
+    <Compile Include="Parser\CommandSyntax\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Parser\CommandSyntax\Syntax.cs" />
     <Compile Include="Parser\Models\Command.cs" />
     <Compile Include="Parser\Models\Delegates.cs" />
@@ -54,6 +59,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Parser\CommandSyntax\InternalBuiltInCommands.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Parser\CommandSyntax\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
