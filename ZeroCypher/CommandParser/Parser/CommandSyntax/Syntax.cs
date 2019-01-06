@@ -14,7 +14,12 @@ namespace CommandParser.Parser.CommandSyntax {
             BuildCommands();
         }
         private void BuildCommands() {
-            _commands = JsonConvert.DeserializeObject<List<Command>>(Resources.InternalBuiltInCommands.ToString());
+            byte[] bytestream = Resources.InternalBuiltInCommands;
+            string Jsonfile;
+            using (StreamReader stream = new StreamReader(new MemoryStream(bytestream))) {
+                Jsonfile = stream.ReadToEnd();
+            }
+            _commands = JsonConvert.DeserializeObject<List<Command>>(Jsonfile);
         }
         public bool SearchCommand(string name) {
             if (_commands.Find(x => x.Name == name) != null)
@@ -31,5 +36,32 @@ namespace CommandParser.Parser.CommandSyntax {
             else
                 return false;   //Argument NOT Found
         }
+        public string CommandDescription(string name) {
+            Command com = _commands.Find(x => x.Name == name);
+            if (com == null)
+                return $"{name} is an invalid command";
+            else {
+                return $"{name}: {com.Description}";
+            }
+        }
+        public string CommandDescriptionWithArguments(string name) {
+            Command com = _commands.Find(x => x.Name == name);
+            if (com == null)
+                return $"{name} is an invalid command";
+            else {
+                StringBuilder result = new StringBuilder(40);
+                result.Append($"{name}: {com.Description}\nARGUMENTS:\n");
+
+                if (com.ExplicitArguments.Count > 0) {
+                    foreach (var arg in com.ExplicitArguments) {
+                        result.Append($"{arg.Name}: {arg.Description}\n");
+                    }
+                    return result.ToString();
+                }
+                else
+                    return result.ToString() + $"{name}: has no arguments\n";
+            }
+        }
+
     }
 }

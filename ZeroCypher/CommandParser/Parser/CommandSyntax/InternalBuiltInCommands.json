@@ -1,0 +1,75 @@
+[
+  {
+    "Name": "SerialOpen",
+    "Description": "Used to create a serial connection",
+    "ExplicitArguments": [
+      {
+        "Name": "-N",
+        "Description": "Specifie the port name",
+        "ExplicitArguments": []
+      },
+      {
+        "Name": "-B",
+        "Description": "Specifie the baude rate",
+        "ExplicitArguments": []
+      }
+    ]
+  },
+  {
+    "Name": "SeriaClose",
+    "Description": "Used to close a serial connection",
+    "ExplicitArguments": []
+  },
+  {
+    "Name": "SeriaInfo",
+    "Description": "Retrive information about the serial port",
+    "ExplicitArguments": []
+  },
+  {
+    "Name": "Help",
+    "Description": "List of all available commands",
+    "ExplicitArguments": []
+  },
+  {
+    "Name": "Encode",
+    "Description": "Encode message",
+    "ExplicitArguments": [
+      {
+        "Name": "-M",
+        "Description": "Message to encode",
+        "ExplicitArguments": []
+      },
+      {
+        "Name": "-K",
+        "Description": "Key used for the encoding",
+        "ExplicitArguments": []
+      },
+      {
+        "Name": "-T",
+        "Description": "Type of encryption. 'Caesar' or 'Transposition' ",
+        "ExplicitArguments": []
+      }
+    ]
+  },
+  {
+    "Name": "Decode",
+    "Description": "Decode message",
+    "ExplicitArguments": [
+      {
+        "Name": "-M",
+        "Description": "Message to Decoding",
+        "ExplicitArguments": []
+      },
+      {
+        "Name": "-K",
+        "Description": "Key used for the Decoding",
+        "ExplicitArguments": []
+      },
+      {
+        "Name": "-T",
+        "Description": "Type of decryption. 'Caesar' or 'Transposition' ",
+        "ExplicitArguments": []
+      }
+    ]
+  }
+]

@@ -120,7 +120,7 @@ namespace CommandBuilder {
         }
 
         private void btnSaveFile_Click(object sender, EventArgs e) {
-            File.WriteAllText(lblFileName.Text, JsonConvert.SerializeObject(CommandList));
+            File.WriteAllText(lblFileName.Text, JsonConvert.SerializeObject(CommandList,Formatting.Indented));
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {

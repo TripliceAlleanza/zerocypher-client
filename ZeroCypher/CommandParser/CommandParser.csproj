@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\ICommandParser.cs" />
-    <Compile Include="Parser\CommandParser.cs" />
+    <Compile Include="Parser\CommandAnalyser.cs" />
     <Compile Include="Parser\CommandSyntax\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -58,11 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Parser\CommandSyntax\InternalBuiltInCommands.json" />
+    <EmbeddedResource Include="Parser\CommandSyntax\InternalBuiltInCommands.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Parser\CommandSyntax\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

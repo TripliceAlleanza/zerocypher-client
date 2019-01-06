@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CommandParser.Parser.Models {
     public class Command {
         public string Name { get; set; }
-        public string description { get; set; }
+        public string Description { get; set; }
         public List<Command> ExplicitArguments { get; set; }
         public Command() {
             ExplicitArguments = new List<Command>();
@@ -15,13 +15,13 @@ namespace CommandParser.Parser.Models {
 
         public Command(string name, string description) {
             Name = name;
-            this.description = description;
+            this.Description = description;
             ExplicitArguments = new List<Command>();
         }
 
         public Command(string name, string description, List<Command> explicitArguments) {
             Name = name;
-            this.description = description;
+            this.Description = description;
             ExplicitArguments = explicitArguments;
             ExplicitArguments = new List<Command>();
         }
