@@ -12,6 +12,8 @@ using ZeroCypher.Models;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Linq;
 using CommandParser.Interface;
+using CommandParser.Parser;
+using CommandParser.Parser.Models;
 
 namespace ZeroCypher {
     public partial class frmMain : Form {
@@ -19,19 +21,25 @@ namespace ZeroCypher {
         private StringBuilder buffer = new StringBuilder();
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
-        ICommandParser Parser;
-
+        private CommandAnalyser Console = new CommandAnalyser();
         public frmMain() {
             InitializeComponent();
         }
 
         private void frmMain_Load(object sender, EventArgs e) {
+            Console.Write = ConsoleWrite;
             CheckForIllegalCrossThreadCalls = false;
             UpdatePortList();
             UpdateComboBoxList();
             Serial.DataReceived += Serial_DataReceived;
 
         }
+
+        private void ConsoleWrite(string text)
+        {
+            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText(text); });
+        }
+
         private void BlockEncodingAndDecoding()
         {
 
@@ -138,12 +146,18 @@ namespace ZeroCypher {
         private void txtConsole_KeyDown(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
                 case Keys.Enter:
-                    
+                    Console.Execute("Help");
                     break;
                 case Keys.OemQuestion:
-                    Parser.MoreInformation(Delegate.CreateDelegate((Control)txtConsole));
+                    //Parser.MoreInformation(Delegate.CreateDelegate((Control)txtConsole));
                     break;
             }
+        }
+        private string ReadLine()
+        {
+            int totalLines = txtConsole.Lines.Length;
+
+            return txtConsole.Lines[totalLines - 1];
         }
     }
 }

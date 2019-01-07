@@ -8,9 +8,11 @@ using System.Reflection;
 using CommandParser.Parser.Models;
 using CommandParser.Parser.CommandSyntax;
 
-namespace CommandParser.Parser {
+namespace CommandParser.Parser
+{
     //[AttributeUsage(AttributeTargets.All)]
-    public class CommandAnalyser : System.Attribute {
+    public class CommandAnalyser:System.Attribute
+    {
         public Delegates.ConsoleWrite Write;
         public Delegates.SerialOpenConnection OpenConnection;
         public Delegates.SerialCloseConnection CloseConnection;
@@ -18,18 +20,21 @@ namespace CommandParser.Parser {
         public bool TESTING = false;
         private Syntax BuiltInCommands = new Syntax();
 
-        public CommandAnalyser() {
-            
+        public CommandAnalyser()
+        {
+
         }
 
-        public void Execute(string command) {
+        public void Execute(string command)
+        {
             string[] values = command.Split(' ');
 
-            if (BuiltInCommands.SearchCommand(values[0])) {
-                MethodInfo CommandRoutine = typeof(CommandAnalyser).GetMethod(values[0], BindingFlags.NonPublic | BindingFlags.Instance);
-                CommandRoutine.Invoke(this,new object[] { values});
-            }
-            else {
+            if (BuiltInCommands.SearchCommand(values[0]))
+            {
+                MethodInfo CommandRoutine = typeof(CommandAnalyser).GetMethod(values[0],BindingFlags.NonPublic | BindingFlags.Instance);
+                CommandRoutine.Invoke(this,new object[] { values });
+            } else
+            {
                 WriteInvalidCommand();
             }
 
@@ -55,25 +60,81 @@ namespace CommandParser.Parser {
             #endregion
         }
 
-        private void Help(string[] comm) {
-            if (comm.GetUpperBound(0) > 0) {
+        private void Help(string[] comm)
+        {
+            if (comm.GetUpperBound(0) > 0)
+            {
                 WriteInvalidArgument();
-            }
-            else
+            } else
                 Write(BuiltInCommands.AllCommandsDescription());
         }
 
-        public string MoreInformation(Delegate textbox) {
+        public string MoreInformation(string[] comm)
+        {
             throw new NotImplementedException();
         }
-        private void SerialOpen() {
+        private void SerialOpen(string[] comm)
+        {
+            try
+            {
+                if (comm.Length < 5)
+                {
+                    WriteInvalidArgument();
+                } else
+                {
+                    string N = "";
+                    string B = "";
+                    int AllDone = 0;
+                    for (int i = 0;i < comm.Length;i++)
+                    {
+                        if (comm[i] == "-N")
+                        {
+                            for (int j = i + 1;j < comm.Length;j++)
+                            {
+                                if (comm[j] != "-B")
+                                    N += comm[j];
+                                else
+                                {
+                                    AllDone++;
+                                    break;
+                                }
+                            }
+                        }
+                        if (comm[i] == "-B")
+                        {
+                            for (int j = i + 1;j < comm.Length;j++)
+                            {
+                                if (comm[j] != "-N")
+                                    B += comm[j];
+                                else
+                                {
+                                    AllDone++;
+                                    break;
+                                }
+                            }
+                        }
+                        if (AllDone == 2)
+                            break;
+                    }
+                    OpenConnection(N,Convert.ToInt32(B));
+                }
+            } catch (Exception ex)
+            {
+                Write(ex.Message+"\n");
+                WriteInvalidArgument();
+            }
+        }
+        private void SeriaInfo()
+        {
 
         }
-        private void WriteInvalidArgument() {
-            Write("Invalid Argument\n");
+        private void WriteInvalidArgument()
+        {
+            Write("Invalid Arguments\n");
         }
-        private void WriteInvalidCommand() {
-            Write("Invalid Argument\n");
+        private void WriteInvalidCommand()
+        {
+            Write("Invalid Command\n");
         }
     }
 }
