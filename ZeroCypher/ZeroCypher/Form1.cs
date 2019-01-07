@@ -22,6 +22,7 @@ namespace ZeroCypher {
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
+        private long caretPos = 0;
         public frmMain() {
             InitializeComponent();
         }
@@ -37,7 +38,8 @@ namespace ZeroCypher {
 
         private void ConsoleWrite(string text)
         {
-            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText(text); });
+            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n"+text); });
+            caretPos = txtConsole.Lines.Length;
         }
 
         private void BlockEncodingAndDecoding()
@@ -146,7 +148,7 @@ namespace ZeroCypher {
         private void txtConsole_KeyDown(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
                 case Keys.Enter:
-                    Console.Execute("Help");
+                    Console.Execute(ReadLine());
                     break;
                 case Keys.OemQuestion:
                     //Parser.MoreInformation(Delegate.CreateDelegate((Control)txtConsole));
@@ -155,9 +157,13 @@ namespace ZeroCypher {
         }
         private string ReadLine()
         {
-            int totalLines = txtConsole.Lines.Length;
-
-            return txtConsole.Lines[totalLines - 1];
+            string comm = "";
+            for (; caretPos < txtConsole.Lines.LongLength;caretPos++)
+            {
+                comm += txtConsole.Lines[caretPos];
+            }
+            caretPos = txtConsole.SelectionStart;
+            return comm;
         }
     }
 }
