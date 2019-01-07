@@ -29,6 +29,8 @@ namespace ZeroCypher {
 
         private void frmMain_Load(object sender, EventArgs e) {
             Console.Write = ConsoleWrite;
+            Console.OpenConnection = Connect;
+            Console.Serialinfo = SerialInformation;
             CheckForIllegalCrossThreadCalls = false;
             UpdatePortList();
             UpdateComboBoxList();
@@ -92,6 +94,22 @@ namespace ZeroCypher {
             if (Serial.IsOpen)
                 Serial.Close();
             Serial.Open();
+        }
+        private void Connect(string name, int baudeRate)
+        {
+            try
+            {
+                Serial.PortName = name;
+                Serial.BaudRate = baudeRate;
+                if (Serial.IsOpen)
+                    Serial.Close();
+                Serial.Open();
+                ConsoleWrite($"Connected to: {Serial.PortName}");
+            }
+            catch(Exception ex)
+            {
+                ConsoleWrite(ex.Message+"\n");
+            }
         }
 
         private void btnEncrypt_Click(object sender, EventArgs e) {
@@ -164,6 +182,15 @@ namespace ZeroCypher {
             }
             caretPos = txtConsole.SelectionStart;
             return comm;
+        }
+        private void SerialInformation()
+        {
+            string info ="";
+            if (Serial.IsOpen)
+                info += $"Connected to: {Serial.PortName}\nBaude rate: {Serial.BaudRate}";
+            else
+                info += $"Serial Port is not connected";
+            ConsoleWrite(info);
         }
     }
 }

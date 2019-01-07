@@ -16,12 +16,12 @@
     ]
   },
   {
-    "Name": "SeriaClose",
+    "Name": "SerialClose",
     "Description": "Used to close a serial connection",
     "ExplicitArguments": []
   },
   {
-    "Name": "SeriaInfo",
+    "Name": "SerialInfo",
     "Description": "Retrive information about the serial port",
     "ExplicitArguments": []
   },

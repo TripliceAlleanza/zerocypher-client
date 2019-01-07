@@ -17,6 +17,7 @@ namespace CommandParser.Parser
         public Delegates.SerialOpenConnection OpenConnection;
         public Delegates.SerialCloseConnection CloseConnection;
         public Delegates.SerialSendData SendData;
+        public Delegates.SerialInfo Serialinfo;
         public bool TESTING = false;
         private Syntax BuiltInCommands = new Syntax();
 
@@ -117,6 +118,7 @@ namespace CommandParser.Parser
                             break;
                     }
                     OpenConnection(N,Convert.ToInt32(B));
+                    
                 }
             } catch (Exception ex)
             {
@@ -124,9 +126,9 @@ namespace CommandParser.Parser
                 WriteInvalidArgument();
             }
         }
-        private void SeriaInfo()
+        private void SerialInfo(string[] comm)
         {
-
+            Serialinfo();
         }
         private void WriteInvalidArgument()
         {
