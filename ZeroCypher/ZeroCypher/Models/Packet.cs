@@ -9,9 +9,9 @@ namespace ZeroCypher.Models {
    public class Packet {
 
         public int id { get; set; }
-        public string msg { get; set; }
+        public string message { get; set; }
         public string key { get; set; }
-        public bool mod { get; set; }
+        public bool mode { get; set; }
         public string algorithm { get; set; }
         public string status { get; set; }
 
@@ -20,9 +20,9 @@ namespace ZeroCypher.Models {
         }
 
         public Packet(string msg, string key, bool mod, string algorithm, string status) {
-            this.msg = msg;
+            this.message = msg;
             this.key = key;
-            this.mod = mod;
+            this.mode = mod;
             this.algorithm = algorithm;
             this.status = status;
         }
@@ -33,18 +33,18 @@ namespace ZeroCypher.Models {
         public override bool Equals(object obj) {
             var packet = obj as Packet;
             return packet != null &&
-                   msg == packet.msg &&
+                   message == packet.message &&
                    key == packet.key &&
-                   mod == packet.mod &&
+                   mode == packet.mode &&
                    algorithm == packet.algorithm &&
                    status == packet.status;
         }
 
         public override int GetHashCode() {
             var hashCode = -594347158;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(msg);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(message);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(key);
-            hashCode = hashCode * -1521134295 + mod.GetHashCode();
+            hashCode = hashCode * -1521134295 + mode.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(algorithm);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(status);
             return hashCode;

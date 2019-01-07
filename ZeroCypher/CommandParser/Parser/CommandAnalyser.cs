@@ -118,7 +118,6 @@ namespace CommandParser.Parser
                             break;
                     }
                     OpenConnection(N,Convert.ToInt32(B));
-                    
                 }
             } catch (Exception ex)
             {
