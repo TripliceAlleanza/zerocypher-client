@@ -17,6 +17,7 @@ using CommandParser.Parser.Models;
 
 namespace ZeroCypher {
     public partial class frmMain : Form {
+        private string consoletext = "Console --";
         private SerialPort Serial = new SerialPort();
         private StringBuilder buffer = new StringBuilder();
         private List<Packet> OutputBuffer = new List<Packet>();
@@ -32,6 +33,7 @@ namespace ZeroCypher {
             Console.OpenConnection = Connect;
             Console.Serialinfo = SerialInformation;
             CheckForIllegalCrossThreadCalls = false;
+            txtConsole.AppendText(consoletext);
             UpdatePortList();
             UpdateComboBoxList();
             Serial.DataReceived += Serial_DataReceived;
@@ -40,7 +42,9 @@ namespace ZeroCypher {
 
         private void ConsoleWrite(string text)
         {
-            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n"+text); });
+            
+            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n"+text+consoletext); });
+            
             caretPos = txtConsole.Lines.Length;
         }
 
@@ -164,9 +168,14 @@ namespace ZeroCypher {
 
 
         private void txtConsole_KeyDown(object sender, KeyEventArgs e) {
+            e.Handled = true;
             switch (e.KeyCode) {
                 case Keys.Enter:
-                    Console.Execute(ReadLine());
+                    string comm = ReadLine();
+                    if (!String.IsNullOrWhiteSpace(comm))
+                        Console.Execute(comm);
+                    else
+                        ConsoleWrite("");
                     break;
                 case Keys.OemQuestion:
                     //Parser.MoreInformation(Delegate.CreateDelegate((Control)txtConsole));
@@ -181,7 +190,7 @@ namespace ZeroCypher {
                 comm += txtConsole.Lines[caretPos];
             }
             caretPos = txtConsole.SelectionStart;
-            return comm;
+            return comm = comm.Remove(0,consoletext.Length).Trim();
         }
         private void SerialInformation()
         {
