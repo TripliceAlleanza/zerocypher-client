@@ -8,34 +8,39 @@ using System.Reflection;
 using CommandParser.Parser.Models;
 using CommandParser.Parser.CommandSyntax;
 
-namespace CommandParser.Parser
-{
+namespace CommandParser.Parser {
     //[AttributeUsage(AttributeTargets.All)]
-    public class CommandAnalyser:System.Attribute
-    {
+    public class CommandAnalyser : System.Attribute {
         public Delegates.ConsoleWrite Write;
         public Delegates.SerialOpenConnection OpenConnection;
         public Delegates.SerialCloseConnection CloseConnection;
         public Delegates.SerialSendData SendData;
         public Delegates.SerialInfo Serialinfo;
-        public bool TESTING = false;
+        //public bool TESTING = false;
         private Syntax BuiltInCommands = new Syntax();
 
-        public CommandAnalyser()
-        {
+        public CommandAnalyser() {
 
         }
 
-        public void Execute(string command)
-        {
+        public void Execute(string command) {
+            bool InformationComm = false;
+            if (command[command.Length - 1] == '?') {
+                command = command.Remove(command.Length - 1, 1);
+                InformationComm = true;
+            }
             string[] values = command.Split(' ');
-
-            if (BuiltInCommands.SearchCommand(values[0]))
-            {
-                MethodInfo CommandRoutine = typeof(CommandAnalyser).GetMethod(values[0],BindingFlags.NonPublic | BindingFlags.Instance);
-                CommandRoutine.Invoke(this,new object[] { values });
-            } else
-            {
+           
+            if (BuiltInCommands.SearchCommand(values[0])) {
+                if (InformationComm) {
+                    Information(values);
+                }
+                else {
+                    MethodInfo CommandRoutine = typeof(CommandAnalyser).GetMethod(values[0], BindingFlags.NonPublic | BindingFlags.Instance);
+                    CommandRoutine.Invoke(this, new object[] { values });
+                }
+            }
+            else {
                 WriteInvalidCommand();
             }
 
@@ -61,54 +66,42 @@ namespace CommandParser.Parser
             #endregion
         }
 
-        private void Help(string[] comm)
-        {
-            if (comm.GetUpperBound(0) > 0)
-            {
+        private void Help(string[] comm) {
+            if (comm.GetUpperBound(0) > 0) {
                 WriteInvalidArgument();
-            } else
+            }
+            else
                 Write(BuiltInCommands.AllCommandsDescription());
         }
 
-        public string MoreInformation(string[] comm)
-        {
+        public string MoreInformation(string[] comm) {
             throw new NotImplementedException();
         }
-        private void SerialOpen(string[] comm)
-        {
-            try
-            {
-                if (comm.Length < 5)
-                {
+        private void SerialOpen(string[] comm) {
+            try {
+                if (comm.Length < 5) {
                     WriteInvalidArgument();
-                } else
-                {
+                }
+                else {
                     string N = "";
                     string B = "";
                     int AllDone = 0;
-                    for (int i = 0;i < comm.Length;i++)
-                    {
-                        if (comm[i] == "-N")
-                        {
-                            for (int j = i + 1;j < comm.Length;j++)
-                            {
+                    for (int i = 0; i < comm.Length; i++) {
+                        if (comm[i] == "-N") {
+                            for (int j = i + 1; j < comm.Length; j++) {
                                 if (comm[j] != "-B")
                                     N += comm[j];
-                                else
-                                {
+                                else {
                                     AllDone++;
                                     break;
                                 }
                             }
                         }
-                        if (comm[i] == "-B")
-                        {
-                            for (int j = i + 1;j < comm.Length;j++)
-                            {
+                        if (comm[i] == "-B") {
+                            for (int j = i + 1; j < comm.Length; j++) {
                                 if (comm[j] != "-N")
                                     B += comm[j];
-                                else
-                                {
+                                else {
                                     AllDone++;
                                     break;
                                 }
@@ -117,24 +110,24 @@ namespace CommandParser.Parser
                         if (AllDone == 2)
                             break;
                     }
-                    OpenConnection(N,Convert.ToInt32(B));
+                    OpenConnection(N, Convert.ToInt32(B));
                 }
-            } catch (Exception ex)
-            {
-                Write(ex.Message+"\n");
+            }
+            catch (Exception ex) {
+                Write(ex.Message + "\n");
                 WriteInvalidArgument();
             }
         }
-        private void SerialInfo(string[] comm)
-        {
+        private void Information(string[] comm) {
+            Write(BuiltInCommands.CommandDescriptionWithArguments(comm[0]));
+        }
+        private void SerialInfo(string[] comm) {
             Serialinfo();
         }
-        private void WriteInvalidArgument()
-        {
+        private void WriteInvalidArgument() {
             Write("Invalid Arguments\n");
         }
-        private void WriteInvalidCommand()
-        {
+        private void WriteInvalidCommand() {
             Write("Invalid Command\n");
         }
     }

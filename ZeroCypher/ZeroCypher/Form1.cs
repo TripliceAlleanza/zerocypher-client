@@ -40,20 +40,26 @@ namespace ZeroCypher {
 
         }
 
-        private void ConsoleWrite(string text)
-        {
-            
-            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n"+text+consoletext); });
-            
-            caretPos = txtConsole.Lines.Length;
+        private void ConsoleWrite(string text) {
+            //not a ENTER
+            if (text != "") {
+
+                if (text[text.Length - 1] != '\n')
+                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + '\n' + consoletext); });
+                else
+                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + consoletext); });
+            }
+            else {
+                //ENTER
+                txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + consoletext); });
+            }
+            caretPos = txtConsole.Lines.GetUpperBound(0);
         }
 
-        private void BlockEncodingAndDecoding()
-        {
+        private void BlockEncodingAndDecoding() {
 
         }
-        private void UpdateComboBoxList()
-        {
+        private void UpdateComboBoxList() {
             var obj = new string[] { "cesare", "trasposizione" };
             cobEncryptionType.DataSource = obj;
             cobDecryptionType.DataSource = obj;
@@ -62,8 +68,7 @@ namespace ZeroCypher {
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
             buffer.Append(Serial.ReadExisting());
             JObject data = JObject.Parse(buffer.ToString());
-            if (data.IsValid(JsonPacketValidator))
-            {
+            if (data.IsValid(JsonPacketValidator)) {
                 RecivedPacket temp = RecivedPacket.Dserialize(buffer.ToString());
             }
         }
@@ -78,10 +83,8 @@ namespace ZeroCypher {
         }
 
         private void btnConnect_Click(object sender, EventArgs e) {
-            try
-            {
-                if (!String.IsNullOrWhiteSpace(cobPortList.SelectedItem.ToString()) && !String.IsNullOrWhiteSpace(txtBaudeRate.Text))
-                {
+            try {
+                if (!String.IsNullOrWhiteSpace(cobPortList.SelectedItem.ToString()) && !String.IsNullOrWhiteSpace(txtBaudeRate.Text)) {
                     Serial.PortName = cobPortList.SelectedItem.ToString();
                     Serial.BaudRate = Convert.ToInt32(txtBaudeRate.Text);
                     Connect();
@@ -89,8 +92,7 @@ namespace ZeroCypher {
                 else
                     MessageBox.Show("Fill all the values before connecting", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -99,10 +101,8 @@ namespace ZeroCypher {
                 Serial.Close();
             Serial.Open();
         }
-        private void Connect(string name, int baudeRate)
-        {
-            try
-            {
+        private void Connect(string name, int baudeRate) {
+            try {
                 Serial.PortName = name;
                 Serial.BaudRate = baudeRate;
                 if (Serial.IsOpen)
@@ -110,91 +110,93 @@ namespace ZeroCypher {
                 Serial.Open();
                 ConsoleWrite($"Connected to: {Serial.PortName}");
             }
-            catch(Exception ex)
-            {
-                ConsoleWrite(ex.Message+"\n");
+            catch (Exception ex) {
+                ConsoleWrite(ex.Message + "\n");
             }
         }
 
         private void btnEncrypt_Click(object sender, EventArgs e) {
-            try
-            {
-                if (Serial.IsOpen)
-                {
-                    if (!String.IsNullOrWhiteSpace(TxtEncMessage.Text) && !String.IsNullOrWhiteSpace(txtEncryptionKey.Text) && !string.IsNullOrWhiteSpace(cobEncryptionType.SelectedItem.ToString()))
-                    {
+            try {
+                if (Serial.IsOpen) {
+                    if (!String.IsNullOrWhiteSpace(TxtEncMessage.Text) && !String.IsNullOrWhiteSpace(txtEncryptionKey.Text) && !string.IsNullOrWhiteSpace(cobEncryptionType.SelectedItem.ToString())) {
                         Packet pak = new Packet(TxtEncMessage.Text, txtEncryptionKey.Text, true, cobEncryptionType.SelectedItem.ToString(), "request");
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
-                        Serial.Write(Packet.Serialize(pak, false)+ "\n");
+                        Serial.Write(Packet.Serialize(pak, false) + "\n");
                         txtConsole.AppendText($"Data sent to port: '{Serial.PortName}', to be encrypted, the data sent is: \r\n{Packet.Serialize(pak, true)} ");
                     }
                 }
-                else
-                {
+                else {
                     MessageBox.Show("The Client is not connected to a serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 MessageBox.Show("Select a value in the Combobox", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void brnDecryption_Click(object sender, EventArgs e) {
-            try
-            {
-                if (Serial.IsOpen)
-                {
-                    if (!String.IsNullOrWhiteSpace(txtMessageDecryption.Text) && !String.IsNullOrWhiteSpace(txtDecryptionKey.Text) && !string.IsNullOrWhiteSpace(cobDecryptionType.SelectedItem.ToString()))
-                    {
+            try {
+                if (Serial.IsOpen) {
+                    if (!String.IsNullOrWhiteSpace(txtMessageDecryption.Text) && !String.IsNullOrWhiteSpace(txtDecryptionKey.Text) && !string.IsNullOrWhiteSpace(cobDecryptionType.SelectedItem.ToString())) {
                         Packet pak = new Packet(txtMessageDecryption.Text, txtDecryptionKey.Text, false, cobDecryptionType.SelectedItem.ToString(), "request");
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
-                        Serial.Write(Packet.Serialize(pak, false)+"\n");
+                        Serial.Write(Packet.Serialize(pak, false) + "\n");
                         txtConsole.AppendText($"Data sent to port: '{Serial.PortName}', to be decrypted, the data sent is:\r\n {Packet.Serialize(pak, true)} ");
                     }
                 }
-                else
-                {
+                else {
                     MessageBox.Show("The Client is not connected to a serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 MessageBox.Show("Select a value in the Combobox", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         private void txtConsole_KeyDown(object sender, KeyEventArgs e) {
-            e.Handled = true;
+
             switch (e.KeyCode) {
                 case Keys.Enter:
+                    e.Handled = true;
                     string comm = ReadLine();
                     if (!String.IsNullOrWhiteSpace(comm))
                         Console.Execute(comm);
                     else
                         ConsoleWrite("");
                     break;
-                case Keys.OemQuestion:
-                    //Parser.MoreInformation(Delegate.CreateDelegate((Control)txtConsole));
+                case Keys.Oem4:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    string temp = ReadLine();
+                    Console.Execute(temp+"?");
+                    //ConsoleWrite("");
+                    txtConsole.AppendText(temp);
                     break;
             }
         }
-        private string ReadLine()
-        {
+        private string ReadLine() {
             string comm = "";
-            for (; caretPos < txtConsole.Lines.LongLength;caretPos++)
-            {
-                comm += txtConsole.Lines[caretPos];
+            try {
+                for (; caretPos < txtConsole.Lines.LongLength; caretPos++) {
+                    comm += txtConsole.Lines[caretPos];
+                }
             }
-            caretPos = txtConsole.SelectionStart;
-            return comm = comm.Remove(0,consoletext.Length).Trim();
+            catch (IndexOutOfRangeException) {
+                //TODO: don't know... i'll do something later...
+            }
+            caretPos = txtConsole.Lines.GetUpperBound(0);
+            try {
+                return comm = comm.Remove(0, consoletext.Length).Trim();
+            }
+            catch (ArgumentOutOfRangeException) {
+                return comm = "INVALID";
+            }
         }
-        private void SerialInformation()
-        {
-            string info ="";
+        private void SerialInformation() {
+            string info = "";
             if (Serial.IsOpen)
                 info += $"Connected to: {Serial.PortName}\nBaude rate: {Serial.BaudRate}";
             else
