@@ -23,6 +23,7 @@ namespace ZeroCypher {
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
+        private bool BlockInput = false;
         private long caretPos = 0;
         public frmMain() {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace ZeroCypher {
             txtConsole.AppendText(consoletext);
             UpdatePortList();
             UpdateComboBoxList();
+            UnlockEncodingAndDecoding();
             Serial.DataReceived += Serial_DataReceived;
 
         }
@@ -57,7 +59,17 @@ namespace ZeroCypher {
         }
 
         private void BlockEncodingAndDecoding() {
-
+            BlockInput = true;
+            grbEncoding.Enabled = false;
+            grbDecoding.Enabled = false;
+            ConsoleWrite("Arduino is currently writing, wait until it has finish the assigned task.");
+            txtConsole.Enabled = false;
+        }
+        private void UnlockEncodingAndDecoding() {
+            BlockInput = false; ;
+            grbEncoding.Enabled = true;
+            grbDecoding.Enabled = true;
+            txtConsole.Enabled = true;
         }
         private void UpdateComboBoxList() {
             var obj = new string[] { "cesare", "trasposizione" };
@@ -67,9 +79,21 @@ namespace ZeroCypher {
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
             buffer.Append(Serial.ReadExisting());
-            JObject data = JObject.Parse(buffer.ToString());
-            if (data.IsValid(JsonPacketValidator)) {
-                RecivedPacket temp = RecivedPacket.Dserialize(buffer.ToString());
+            try {
+                JObject data = JObject.Parse(buffer.ToString());
+                if (data.IsValid(JsonPacketValidator)) {
+                    RecivedPacket temp = RecivedPacket.Dserialize(buffer.ToString());
+                    if (temp.status == "writing") {
+                        BlockEncodingAndDecoding();
+                    }
+                    if (temp.status == "done") {
+                        ConsoleWrite($"Task: {temp.id} has been completed.");
+                        UnlockEncodingAndDecoding();
+                    }
+                    buffer.Clear();
+                }
+            }catch(Exception ex) {
+                MessageBox.Show($"Message: {ex.Message}\n\n Source:{ex.Source}\n\n Stack Trace:{ex.StackTrace}\n\n Target using reflection{ex.TargetSite.ToString()}");
             }
         }
 
@@ -123,7 +147,7 @@ namespace ZeroCypher {
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
                         Serial.Write(Packet.Serialize(pak, false) + "\n");
-                        txtConsole.AppendText($"Data sent to port: '{Serial.PortName}', to be encrypted, the data sent is: \r\n{Packet.Serialize(pak, true)} ");
+                        ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be encrypted, the data sent is: \r\n{Packet.Serialize(pak, true)} ");
                     }
                 }
                 else {
@@ -143,7 +167,7 @@ namespace ZeroCypher {
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
                         Serial.Write(Packet.Serialize(pak, false) + "\n");
-                        txtConsole.AppendText($"Data sent to port: '{Serial.PortName}', to be decrypted, the data sent is:\r\n {Packet.Serialize(pak, true)} ");
+                        ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be decrypted, the data sent is:\r\n {Packet.Serialize(pak, true)} ");
                     }
                 }
                 else {

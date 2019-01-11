@@ -54,6 +54,8 @@
             this.txtDecryptionKey = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtMessageDecryption = new System.Windows.Forms.TextBox();
+            this.grbEncoding = new System.Windows.Forms.GroupBox();
+            this.grbDecoding = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
@@ -174,6 +176,7 @@
             this.tabEncoding.Controls.Add(this.txtEncryptionKey);
             this.tabEncoding.Controls.Add(this.label3);
             this.tabEncoding.Controls.Add(this.TxtEncMessage);
+            this.tabEncoding.Controls.Add(this.grbEncoding);
             this.tabEncoding.Location = new System.Drawing.Point(4, 22);
             this.tabEncoding.Name = "tabEncoding";
             this.tabEncoding.Padding = new System.Windows.Forms.Padding(3);
@@ -251,6 +254,7 @@
             this.tabDecoding.Controls.Add(this.txtDecryptionKey);
             this.tabDecoding.Controls.Add(this.label8);
             this.tabDecoding.Controls.Add(this.txtMessageDecryption);
+            this.tabDecoding.Controls.Add(this.grbDecoding);
             this.tabDecoding.Location = new System.Drawing.Point(4, 22);
             this.tabDecoding.Name = "tabDecoding";
             this.tabDecoding.Size = new System.Drawing.Size(895, 505);
@@ -318,6 +322,22 @@
             this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
             this.txtMessageDecryption.TabIndex = 7;
             // 
+            // grbEncoding
+            // 
+            this.grbEncoding.Location = new System.Drawing.Point(22, 16);
+            this.grbEncoding.Name = "grbEncoding";
+            this.grbEncoding.Size = new System.Drawing.Size(849, 364);
+            this.grbEncoding.TabIndex = 7;
+            this.grbEncoding.TabStop = false;
+            // 
+            // grbDecoding
+            // 
+            this.grbDecoding.Location = new System.Drawing.Point(21, 24);
+            this.grbDecoding.Name = "grbDecoding";
+            this.grbDecoding.Size = new System.Drawing.Size(852, 386);
+            this.grbDecoding.TabIndex = 14;
+            this.grbDecoding.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,6 +387,8 @@
         private System.Windows.Forms.TextBox txtDecryptionKey;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtMessageDecryption;
+        private System.Windows.Forms.GroupBox grbEncoding;
+        private System.Windows.Forms.GroupBox grbDecoding;
     }
 }
 
