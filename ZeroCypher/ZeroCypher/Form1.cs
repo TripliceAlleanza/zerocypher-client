@@ -72,15 +72,15 @@ namespace ZeroCypher {
             txtConsole.Enabled = true;
         }
         private void UpdateComboBoxList() {
-            var obj = new string[] { "cesare", "trasposizione", "morse" };
+            var obj = new string[] { "cesare", "trasposizione"};
             cobEncryptionType.DataSource = obj;
             cobDecryptionType.DataSource = obj;
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
-            string dr = Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", "");
-            buffer.Append(dr);
-            ConsoleWrite(dr);
+            //string dr = Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", "");
+            buffer.Append(Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", ""));
+            //ConsoleWrite(dr);
             try {
                 JObject data = JObject.Parse(buffer.ToString());
                 if (data.IsValid(JsonPacketValidator)) {
