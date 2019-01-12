@@ -74,9 +74,6 @@ namespace CommandParser.Parser {
                 Write(BuiltInCommands.AllCommandsDescription());
         }
 
-        public string MoreInformation(string[] comm) {
-            throw new NotImplementedException();
-        }
         private void SerialOpen(string[] comm) {
             try {
                 if (comm.Length < 5) {
@@ -110,7 +107,10 @@ namespace CommandParser.Parser {
                         if (AllDone == 2)
                             break;
                     }
-                    OpenConnection(N, Convert.ToInt32(B));
+                    if (AllDone == 2)
+                        OpenConnection(N, Convert.ToInt32(B));
+                    else
+                        WriteInvalidArgument();
                 }
             }
             catch (Exception ex) {
@@ -121,14 +121,88 @@ namespace CommandParser.Parser {
         private void Information(string[] comm) {
             Write(BuiltInCommands.CommandDescriptionWithArguments(comm[0]));
         }
+        private void SerialClose(string[] comm) {
+            if (comm.Length == 1)
+                CloseConnection();
+            else
+                WriteInvalidArgument();
+        }
         private void SerialInfo(string[] comm) {
             Serialinfo();
         }
+        private void Encode(string[] comm) {
+            Send(comm, true);
+        }
+        private void Decode(string[] comm) {
+            Send(comm, false);
+        }
+        private void Send(string[]comm, bool MODE) {
+            try {
+                if (comm.Length < 7) {
+                    WriteInvalidArgument();
+                }
+                else {
+                    string M = "";
+                    string K = "";
+                    string T = "";
+                    int AllDone = 0;
+                    for (int i = 0; i < comm.Length; i++) {
+                        if (comm[i] == "-M") {
+                            for (int j = i + 1; j < comm.Length; j++) {
+                                if (comm[j] != "-K" || comm[j] != "-T")
+                                    M += comm[j];
+                                else {
+                                    AllDone++;
+                                    break;
+                                }
+                            }
+                        }
+                        if (comm[i] == "-K") {
+                            for (int j = i + 1; j < comm.Length; j++) {
+                                if (comm[j] != "-M" || comm[j] != "-T")
+                                    K += comm[j];
+                                else {
+                                    AllDone++;
+                                    break;
+                                }
+                            }
+                        }
+                        if (comm[i] == "-T") {
+                            for (int j = i + 1; j < comm.Length; j++) {
+                                if (comm[j] != "-M" || comm[j] != "-K")
+                                    T += comm[j];
+                                else {
+                                    AllDone++;
+                                    break;
+                                }
+                            }
+                        }
+                        if (AllDone == 3)
+                            break;
+                    }
+                    if (AllDone == 3)
+                        try {
+                            SendData(M, Convert.ToInt32(K), T, MODE);
+                        }
+                        catch (InvalidCastException) {
+                            Write("THE KEY ARGUMENT MUST BE NUMERIC");
+                        }
+                    else
+                        WriteInvalidArgument();
+                }
+            }
+            catch (Exception ex) {
+                Write(ex.Message + "\n");
+                WriteInvalidArgument();
+            }
+        }
+
         private void WriteInvalidArgument() {
             Write("Invalid Arguments\n");
         }
         private void WriteInvalidCommand() {
             Write("Invalid Command\n");
         }
+        
     }
 }

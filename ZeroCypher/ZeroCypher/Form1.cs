@@ -20,6 +20,7 @@ namespace ZeroCypher {
         private string consoletext = "Console --";
         private SerialPort Serial = new SerialPort();
         private StringBuilder buffer = new StringBuilder();
+        private List<String> CommandBuffer = new List<string>();
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
@@ -30,9 +31,14 @@ namespace ZeroCypher {
         }
 
         private void frmMain_Load(object sender, EventArgs e) {
+            Serial.Parity = Parity.Even;
+            Serial.StopBits = StopBits.Two;
+            Serial.DataBits = 8;
             Console.Write = ConsoleWrite;
             Console.OpenConnection = Connect;
             Console.Serialinfo = SerialInformation;
+            Console.CloseConnection = Disconnect;
+            Console.SendData = SendData;
             CheckForIllegalCrossThreadCalls = false;
             txtConsole.AppendText(consoletext);
             UpdatePortList();
@@ -43,6 +49,7 @@ namespace ZeroCypher {
         }
 
         private void ConsoleWrite(string text) {
+            txtConsole.ForeColor = Color.Gray;
             //not a ENTER
             if (text != "") {
 
@@ -55,6 +62,7 @@ namespace ZeroCypher {
                 //ENTER
                 txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + consoletext); });
             }
+            txtConsole.ForeColor = Color.White;
             caretPos = txtConsole.Lines.GetUpperBound(0);
         }
 
@@ -71,10 +79,12 @@ namespace ZeroCypher {
             grbDecoding.Enabled = true;
             txtConsole.Enabled = true;
         }
-        private void UpdateComboBoxList() {
-            var obj = new string[] { "cesare", "trasposizione"};
-            cobEncryptionType.DataSource = obj;
-            cobDecryptionType.DataSource = obj;
+        private void UpdateComboBoxList() {           
+            cobEncryptionType.DataSource = GetAlgorithms();
+            cobDecryptionType.DataSource = GetAlgorithms();
+        }
+        private string[] GetAlgorithms() {
+            return new string[] { "cesare", "trasposizione"};
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
@@ -149,6 +159,37 @@ namespace ZeroCypher {
             }
             catch (Exception ex) {
                 ConsoleWrite(ex.Message + "\n");
+            }
+        }
+        private void Disconnect() {
+            try {
+                if (Serial.IsOpen) {
+                    Serial.Close();
+                    ConsoleWrite($"Disconnected from: {Serial.PortName}");
+                }
+            }
+            catch (Exception ex) {
+                ConsoleWrite(ex.Message + "\n");
+            }
+        }
+        private void SendData(string msg, int key, string type, bool mode) {
+            if (type == "cesare") {
+                Packet pak = new Packet(msg, key.ToString(), mode, type, "request");
+                pak.SetHashCode();
+                OutputBuffer.Add(pak);
+                Serial.Write(Packet.Serialize(pak, false) + "\n");
+                ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be encrypted, the request ID is: {pak.id} ");
+            }
+            else {
+                string types = "";
+                string[] temp = GetAlgorithms();
+                for (int i = 0; i < temp.Length; i++) {
+                    if (i != temp.GetUpperBound(0))
+                        types += temp[i] + ", ";
+                    else
+                        types += temp[i];
+                }
+                ConsoleWrite($"Invalid Type, please use: {types}");
             }
         }
 

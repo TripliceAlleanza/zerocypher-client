@@ -4,7 +4,7 @@ namespace CommandParser.Parser.Models {
         public delegate void ConsoleWrite(string Output);
         public delegate void SerialOpenConnection(string PortName, int BaudeRate);
         public delegate void SerialCloseConnection();
-        public delegate void SerialSendData();
+        public delegate void SerialSendData(string msg,int key,string type,bool mode);
         public delegate void SerialInfo();
     }
 }
