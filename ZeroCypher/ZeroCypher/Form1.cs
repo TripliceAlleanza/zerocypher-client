@@ -49,20 +49,21 @@ namespace ZeroCypher {
         }
 
         private void ConsoleWrite(string text) {
-            txtConsole.ForeColor = Color.Gray;
+            txtConsole.SelectionColor = Color.Cyan;
             //not a ENTER
             if (text != "") {
 
                 if (text[text.Length - 1] != '\n')
-                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + '\n' + consoletext); });
+                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + '\n'); });
                 else
-                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + consoletext); });
+                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text); });
             }
             else {
                 //ENTER
-                txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + consoletext); });
+                txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text); });
             }
-            txtConsole.ForeColor = Color.White;
+            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText(consoletext); });
+            txtConsole.SelectionColor = Color.White;
             caretPos = txtConsole.Lines.GetUpperBound(0);
         }
 

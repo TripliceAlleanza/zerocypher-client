@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommandParser.Interface;
-using System.Reflection;
 using CommandParser.Parser.Models;
 using CommandParser.Parser.CommandSyntax;
-
+using System.Reflection;
 namespace CommandParser.Parser {
     //[AttributeUsage(AttributeTargets.All)]
     public class CommandAnalyser : System.Attribute {
@@ -18,10 +17,6 @@ namespace CommandParser.Parser {
         public Delegates.SerialInfo Serialinfo;
         //public bool TESTING = false;
         private Syntax BuiltInCommands = new Syntax();
-
-        public CommandAnalyser() {
-
-        }
 
         public void Execute(string command) {
             bool InformationComm = false;
@@ -43,27 +38,6 @@ namespace CommandParser.Parser {
             else {
                 WriteInvalidCommand();
             }
-
-
-
-            #region TODO_DELETE_IT
-            //switch (values[0]) {
-            //    case "SerialOpen":
-
-            //        break;
-            //    case "SerialClose":
-            //        break;
-            //    case "SerialInfo":
-            //        break;
-            //    case "?":
-            //    case "Help":
-            //        Help();
-            //        break;
-            //    default:
-            //        Write($"'{values[0]}' is an invalid command");
-            //        break;
-            //}
-            #endregion
         }
 
         private void Help(string[] comm) {
@@ -86,20 +60,32 @@ namespace CommandParser.Parser {
                     for (int i = 0; i < comm.Length; i++) {
                         if (comm[i] == "-N") {
                             for (int j = i + 1; j < comm.Length; j++) {
-                                if (comm[j] != "-B")
+                                if (comm[j] != "-B") {
                                     N += comm[j];
+                                    if (j == comm.GetUpperBound(0)) {
+                                        AllDone++;
+                                        break;
+                                    }
+                                }
                                 else {
                                     AllDone++;
+                                    i = j;
                                     break;
                                 }
                             }
                         }
                         if (comm[i] == "-B") {
                             for (int j = i + 1; j < comm.Length; j++) {
-                                if (comm[j] != "-N")
+                                if (comm[j] != "-N") {
                                     B += comm[j];
+                                    if(j == comm.GetUpperBound(0)) {
+                                        AllDone++;
+                                        break;
+                                    }
+                                }
                                 else {
                                     AllDone++;
+                                    i = j;
                                     break;
                                 }
                             }
@@ -137,6 +123,20 @@ namespace CommandParser.Parser {
             Send(comm, false);
         }
         private void Send(string[]comm, bool MODE) {
+            List<string> com = new List<string>();
+            for (int i = 0; i < comm.Length; i++) {
+                if(comm[i] == "-M") {
+                    com.Add(comm[i]);
+                    for (int j = i + 1; j < comm.Length; j++) {
+                        if(comm[j] != "-K" && comm[j] != "-T") {
+
+                        }
+                    }
+                }
+                com.Add(comm[i]);
+            }
+            comm = com.ToArray();
+
             try {
                 if (comm.Length < 7) {
                     WriteInvalidArgument();
@@ -149,8 +149,13 @@ namespace CommandParser.Parser {
                     for (int i = 0; i < comm.Length; i++) {
                         if (comm[i] == "-M") {
                             for (int j = i + 1; j < comm.Length; j++) {
-                                if (comm[j] != "-K" || comm[j] != "-T")
+                                if (comm[j] != "-K" && comm[j] != "-T") {
                                     M += comm[j];
+                                    if (j == comm.GetUpperBound(0)) {
+                                        AllDone++;
+                                        break;
+                                    }
+                                }
                                 else {
                                     AllDone++;
                                     break;
@@ -159,8 +164,13 @@ namespace CommandParser.Parser {
                         }
                         if (comm[i] == "-K") {
                             for (int j = i + 1; j < comm.Length; j++) {
-                                if (comm[j] != "-M" || comm[j] != "-T")
+                                if (comm[j] != "-M" && comm[j] != "-T") {
                                     K += comm[j];
+                                    if (j == comm.GetUpperBound(0)) {
+                                        AllDone++;
+                                        break;
+                                    }
+                                }
                                 else {
                                     AllDone++;
                                     break;
@@ -169,8 +179,13 @@ namespace CommandParser.Parser {
                         }
                         if (comm[i] == "-T") {
                             for (int j = i + 1; j < comm.Length; j++) {
-                                if (comm[j] != "-M" || comm[j] != "-K")
+                                if (comm[j] != "-M" && comm[j] != "-K") {
                                     T += comm[j];
+                                    if (j == comm.GetUpperBound(0)) {
+                                        AllDone++;
+                                        break;
+                                    }
+                                }
                                 else {
                                     AllDone++;
                                     break;
