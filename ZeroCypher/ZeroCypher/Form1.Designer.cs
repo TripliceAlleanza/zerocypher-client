@@ -46,6 +46,7 @@
             this.txtEncryptionKey = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtEncMessage = new System.Windows.Forms.TextBox();
+            this.grbEncoding = new System.Windows.Forms.GroupBox();
             this.tabDecoding = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.cobDecryptionType = new System.Windows.Forms.ComboBox();
@@ -54,8 +55,8 @@
             this.txtDecryptionKey = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtMessageDecryption = new System.Windows.Forms.TextBox();
-            this.grbEncoding = new System.Windows.Forms.GroupBox();
             this.grbDecoding = new System.Windows.Forms.GroupBox();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
@@ -99,6 +100,7 @@
             // tabPorts
             // 
             this.tabPorts.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
+            this.tabPorts.Controls.Add(this.btnDisconnect);
             this.tabPorts.Controls.Add(this.label2);
             this.tabPorts.Controls.Add(this.label1);
             this.tabPorts.Controls.Add(this.txtBaudeRate);
@@ -245,6 +247,14 @@
             this.TxtEncMessage.Size = new System.Drawing.Size(780, 118);
             this.TxtEncMessage.TabIndex = 0;
             // 
+            // grbEncoding
+            // 
+            this.grbEncoding.Location = new System.Drawing.Point(22, 16);
+            this.grbEncoding.Name = "grbEncoding";
+            this.grbEncoding.Size = new System.Drawing.Size(849, 364);
+            this.grbEncoding.TabIndex = 7;
+            this.grbEncoding.TabStop = false;
+            // 
             // tabDecoding
             // 
             this.tabDecoding.Controls.Add(this.label6);
@@ -322,14 +332,6 @@
             this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
             this.txtMessageDecryption.TabIndex = 7;
             // 
-            // grbEncoding
-            // 
-            this.grbEncoding.Location = new System.Drawing.Point(22, 16);
-            this.grbEncoding.Name = "grbEncoding";
-            this.grbEncoding.Size = new System.Drawing.Size(849, 364);
-            this.grbEncoding.TabIndex = 7;
-            this.grbEncoding.TabStop = false;
-            // 
             // grbDecoding
             // 
             this.grbDecoding.Location = new System.Drawing.Point(21, 24);
@@ -337,6 +339,16 @@
             this.grbDecoding.Size = new System.Drawing.Size(852, 386);
             this.grbDecoding.TabIndex = 14;
             this.grbDecoding.TabStop = false;
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(300, 166);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.btnDisconnect.TabIndex = 6;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // frmMain
             // 
@@ -389,6 +401,7 @@
         private System.Windows.Forms.TextBox txtMessageDecryption;
         private System.Windows.Forms.GroupBox grbEncoding;
         private System.Windows.Forms.GroupBox grbDecoding;
+        private System.Windows.Forms.Button btnDisconnect;
     }
 }
 

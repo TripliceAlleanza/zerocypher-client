@@ -72,7 +72,7 @@ namespace ZeroCypher {
             txtConsole.Enabled = true;
         }
         private void UpdateComboBoxList() {
-            var obj = new string[] { "cesare", "trasposizione" };
+            var obj = new string[] { "cesare", "trasposizione", "morse" };
             cobEncryptionType.DataSource = obj;
             cobDecryptionType.DataSource = obj;
         }
@@ -94,6 +94,7 @@ namespace ZeroCypher {
                     }
                     if(temp.status == "ready.") {
                         UnlockEncodingAndDecoding();
+                        ConsoleWrite($"Device ready to receive new commands");
                     }
                     buffer.Clear();
                 }
@@ -128,7 +129,14 @@ namespace ZeroCypher {
         private void Connect() {
             if (Serial.IsOpen)
                 Serial.Close();
-            Serial.Open();
+            try {
+                Serial.Open();
+                MessageBox.Show("Serial port opened successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } catch(Exception e) {
+                MessageBox.Show($"Can't open serial port {Serial.PortName}, {e.ToString()}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
         private void Connect(string name, int baudeRate) {
             try {
@@ -231,6 +239,12 @@ namespace ZeroCypher {
             else
                 info += $"Serial Port is not connected";
             ConsoleWrite(info);
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e) {
+            if(Serial.IsOpen)
+                Serial.Close();
+            MessageBox.Show("Serial port closed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
