@@ -78,7 +78,9 @@ namespace ZeroCypher {
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
-            buffer.Append(Serial.ReadExisting());
+            string dr = Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", "");
+            buffer.Append(dr);
+            ConsoleWrite(dr);
             try {
                 JObject data = JObject.Parse(buffer.ToString());
                 if (data.IsValid(JsonPacketValidator)) {
@@ -88,6 +90,9 @@ namespace ZeroCypher {
                     }
                     if (temp.status == "done") {
                         ConsoleWrite($"Task: {temp.id} has been completed.");
+                        UnlockEncodingAndDecoding();
+                    }
+                    if(temp.status == "ready.") {
                         UnlockEncodingAndDecoding();
                     }
                     buffer.Clear();
