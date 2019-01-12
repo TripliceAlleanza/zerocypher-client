@@ -56,12 +56,13 @@ namespace ZeroCypher {
                 if (text[text.Length - 1] != '\n')
                     txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text + '\n'); });
                 else
-                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text; });
+                    txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text); });
             }
             else {
                 //ENTER
                 txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText("\n" + text); });
             }
+            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText(consoletext); });
             txtConsole.SelectionColor = Color.White;
             caretPos = txtConsole.Lines.GetUpperBound(0);
         }

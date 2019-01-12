@@ -124,10 +124,16 @@ namespace CommandParser.Parser {
         }
         private void Send(string[]comm, bool MODE) {
             List<string> com = new List<string>();
-            foreach (var item in comm) {
-                if (item == "-M" || item == "-K" || item == "-T")
-                    com.Add(" ");
-                com.Add(item);
+            for (int i = 0; i < comm.Length; i++) {
+                if(comm[i] == "-M") {
+                    com.Add(comm[i]);
+                    for (int j = i + 1; j < comm.Length; j++) {
+                        if(comm[j] != "-K" && comm[j] != "-T") {
+
+                        }
+                    }
+                }
+                com.Add(comm[i]);
             }
             comm = com.ToArray();
 
