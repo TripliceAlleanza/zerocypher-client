@@ -62,6 +62,7 @@
             this.tabPorts.SuspendLayout();
             this.tabEncoding.SuspendLayout();
             this.tabDecoding.SuspendLayout();
+            this.grbDecoding.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -103,6 +104,7 @@
             // tabPorts
             // 
             this.tabPorts.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
+            this.tabPorts.BackColor = System.Drawing.Color.Silver;
             this.tabPorts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabPorts.Controls.Add(this.btnDisconnect);
             this.tabPorts.Controls.Add(this.label2);
@@ -117,16 +119,17 @@
             this.tabPorts.Size = new System.Drawing.Size(895, 504);
             this.tabPorts.TabIndex = 1;
             this.tabPorts.Text = "Port Setting";
-            this.tabPorts.UseVisualStyleBackColor = true;
             // 
             // btnDisconnect
             // 
-            this.btnDisconnect.Location = new System.Drawing.Point(300, 166);
+            this.btnDisconnect.BackColor = System.Drawing.Color.Red;
+            this.btnDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDisconnect.Location = new System.Drawing.Point(315, 147);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(86, 23);
             this.btnDisconnect.TabIndex = 6;
             this.btnDisconnect.Text = "Disconnect";
-            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.UseVisualStyleBackColor = false;
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // label2
@@ -157,22 +160,27 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(300, 128);
+            this.btnConnect.BackColor = System.Drawing.Color.Lime;
+            this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnConnect.Location = new System.Drawing.Point(315, 109);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(86, 23);
             this.btnConnect.TabIndex = 2;
             this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.UseVisualStyleBackColor = false;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // btnUpdateList
             // 
-            this.btnUpdateList.Location = new System.Drawing.Point(300, 92);
+            this.btnUpdateList.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnUpdateList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdateList.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnUpdateList.Location = new System.Drawing.Point(315, 73);
             this.btnUpdateList.Name = "btnUpdateList";
             this.btnUpdateList.Size = new System.Drawing.Size(86, 23);
             this.btnUpdateList.TabIndex = 1;
             this.btnUpdateList.Text = "Update list";
-            this.btnUpdateList.UseVisualStyleBackColor = true;
+            this.btnUpdateList.UseVisualStyleBackColor = false;
             this.btnUpdateList.Click += new System.EventHandler(this.btnUpdateList_Click);
             // 
             // cobPortList
@@ -185,6 +193,7 @@
             // 
             // tabEncoding
             // 
+            this.tabEncoding.BackColor = System.Drawing.Color.Silver;
             this.tabEncoding.Controls.Add(this.label5);
             this.tabEncoding.Controls.Add(this.cobEncryptionType);
             this.tabEncoding.Controls.Add(this.btnEncrypt);
@@ -199,7 +208,6 @@
             this.tabEncoding.Size = new System.Drawing.Size(895, 504);
             this.tabEncoding.TabIndex = 2;
             this.tabEncoding.Text = "Encoding";
-            this.tabEncoding.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -220,12 +228,14 @@
             // 
             // btnEncrypt
             // 
+            this.btnEncrypt.BackColor = System.Drawing.Color.Lime;
+            this.btnEncrypt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEncrypt.Location = new System.Drawing.Point(359, 286);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(137, 42);
             this.btnEncrypt.TabIndex = 4;
             this.btnEncrypt.Text = "Encrypt";
-            this.btnEncrypt.UseVisualStyleBackColor = true;
+            this.btnEncrypt.UseVisualStyleBackColor = false;
             this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
             // label4
@@ -271,25 +281,18 @@
             // 
             // tabDecoding
             // 
-            this.tabDecoding.Controls.Add(this.label6);
-            this.tabDecoding.Controls.Add(this.cobDecryptionType);
-            this.tabDecoding.Controls.Add(this.brnDecryption);
-            this.tabDecoding.Controls.Add(this.label7);
-            this.tabDecoding.Controls.Add(this.txtDecryptionKey);
-            this.tabDecoding.Controls.Add(this.label8);
-            this.tabDecoding.Controls.Add(this.txtMessageDecryption);
+            this.tabDecoding.BackColor = System.Drawing.Color.Silver;
             this.tabDecoding.Controls.Add(this.grbDecoding);
             this.tabDecoding.Location = new System.Drawing.Point(4, 23);
             this.tabDecoding.Name = "tabDecoding";
             this.tabDecoding.Size = new System.Drawing.Size(895, 504);
             this.tabDecoding.TabIndex = 3;
             this.tabDecoding.Text = "Decoding";
-            this.tabDecoding.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(520, 203);
+            this.label6.Location = new System.Drawing.Point(505, 178);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(133, 14);
             this.label6.TabIndex = 13;
@@ -298,25 +301,27 @@
             // cobDecryptionType
             // 
             this.cobDecryptionType.FormattingEnabled = true;
-            this.cobDecryptionType.Location = new System.Drawing.Point(523, 219);
+            this.cobDecryptionType.Location = new System.Drawing.Point(508, 194);
             this.cobDecryptionType.Name = "cobDecryptionType";
             this.cobDecryptionType.Size = new System.Drawing.Size(233, 22);
             this.cobDecryptionType.TabIndex = 12;
             // 
             // brnDecryption
             // 
-            this.brnDecryption.Location = new System.Drawing.Point(355, 298);
+            this.brnDecryption.BackColor = System.Drawing.Color.Lime;
+            this.brnDecryption.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.brnDecryption.Location = new System.Drawing.Point(340, 273);
             this.brnDecryption.Name = "brnDecryption";
             this.brnDecryption.Size = new System.Drawing.Size(137, 42);
             this.brnDecryption.TabIndex = 11;
             this.brnDecryption.Text = "Decryption";
-            this.brnDecryption.UseVisualStyleBackColor = true;
+            this.brnDecryption.UseVisualStyleBackColor = false;
             this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(51, 205);
+            this.label7.Location = new System.Drawing.Point(36, 180);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10;
@@ -324,7 +329,7 @@
             // 
             // txtDecryptionKey
             // 
-            this.txtDecryptionKey.Location = new System.Drawing.Point(54, 221);
+            this.txtDecryptionKey.Location = new System.Drawing.Point(39, 196);
             this.txtDecryptionKey.Name = "txtDecryptionKey";
             this.txtDecryptionKey.Size = new System.Drawing.Size(314, 22);
             this.txtDecryptionKey.TabIndex = 9;
@@ -332,7 +337,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(54, 43);
+            this.label8.Location = new System.Drawing.Point(36, 18);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 14);
             this.label8.TabIndex = 8;
@@ -340,7 +345,7 @@
             // 
             // txtMessageDecryption
             // 
-            this.txtMessageDecryption.Location = new System.Drawing.Point(54, 62);
+            this.txtMessageDecryption.Location = new System.Drawing.Point(39, 37);
             this.txtMessageDecryption.Multiline = true;
             this.txtMessageDecryption.Name = "txtMessageDecryption";
             this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
@@ -348,7 +353,14 @@
             // 
             // grbDecoding
             // 
-            this.grbDecoding.Location = new System.Drawing.Point(21, 24);
+            this.grbDecoding.Controls.Add(this.label6);
+            this.grbDecoding.Controls.Add(this.txtMessageDecryption);
+            this.grbDecoding.Controls.Add(this.cobDecryptionType);
+            this.grbDecoding.Controls.Add(this.label8);
+            this.grbDecoding.Controls.Add(this.brnDecryption);
+            this.grbDecoding.Controls.Add(this.txtDecryptionKey);
+            this.grbDecoding.Controls.Add(this.label7);
+            this.grbDecoding.Location = new System.Drawing.Point(22, 16);
             this.grbDecoding.Name = "grbDecoding";
             this.grbDecoding.Size = new System.Drawing.Size(852, 386);
             this.grbDecoding.TabIndex = 14;
@@ -371,7 +383,8 @@
             this.tabEncoding.ResumeLayout(false);
             this.tabEncoding.PerformLayout();
             this.tabDecoding.ResumeLayout(false);
-            this.tabDecoding.PerformLayout();
+            this.grbDecoding.ResumeLayout(false);
+            this.grbDecoding.PerformLayout();
             this.ResumeLayout(false);
 
         }
