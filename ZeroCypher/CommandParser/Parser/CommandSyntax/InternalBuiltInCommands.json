@@ -41,7 +41,7 @@
       },
       {
         "Name": "-K",
-        "Description": "iKey used for the encodng",
+        "Description": "Key used for the encodng",
         "ExplicitArguments": []
       },
       {

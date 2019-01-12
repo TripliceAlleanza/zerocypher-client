@@ -47,7 +47,7 @@ namespace ZeroCypher.Models {
             hashCode = hashCode * -1521134295 + mode.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(algorithm);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(status);
-            return hashCode;
+            return Math.Abs(hashCode);
         }
 
         public static bool operator ==(Packet packet1, Packet packet2) {
