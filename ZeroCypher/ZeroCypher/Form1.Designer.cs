@@ -49,14 +49,14 @@
             this.TxtEncMessage = new System.Windows.Forms.TextBox();
             this.grbEncoding = new System.Windows.Forms.GroupBox();
             this.tabDecoding = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cobDecryptionType = new System.Windows.Forms.ComboBox();
-            this.brnDecryption = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtDecryptionKey = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtMessageDecryption = new System.Windows.Forms.TextBox();
             this.grbDecoding = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtMessageDecryption = new System.Windows.Forms.TextBox();
+            this.cobDecryptionType = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.brnDecryption = new System.Windows.Forms.Button();
+            this.txtDecryptionKey = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
@@ -146,9 +146,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(86, 120);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 14);
+            this.label1.Size = new System.Drawing.Size(77, 14);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Baude Rate:";
+            this.label1.Text = "Baud Rate:";
             // 
             // txtBaudeRate
             // 
@@ -289,68 +289,6 @@
             this.tabDecoding.TabIndex = 3;
             this.tabDecoding.Text = "Decoding";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(505, 178);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 14);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Type of decryption";
-            // 
-            // cobDecryptionType
-            // 
-            this.cobDecryptionType.FormattingEnabled = true;
-            this.cobDecryptionType.Location = new System.Drawing.Point(508, 194);
-            this.cobDecryptionType.Name = "cobDecryptionType";
-            this.cobDecryptionType.Size = new System.Drawing.Size(233, 22);
-            this.cobDecryptionType.TabIndex = 12;
-            // 
-            // brnDecryption
-            // 
-            this.brnDecryption.BackColor = System.Drawing.Color.Lime;
-            this.brnDecryption.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.brnDecryption.Location = new System.Drawing.Point(340, 273);
-            this.brnDecryption.Name = "brnDecryption";
-            this.brnDecryption.Size = new System.Drawing.Size(137, 42);
-            this.brnDecryption.TabIndex = 11;
-            this.brnDecryption.Text = "Decryption";
-            this.brnDecryption.UseVisualStyleBackColor = false;
-            this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(36, 180);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 14);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Key:";
-            // 
-            // txtDecryptionKey
-            // 
-            this.txtDecryptionKey.Location = new System.Drawing.Point(39, 196);
-            this.txtDecryptionKey.Name = "txtDecryptionKey";
-            this.txtDecryptionKey.Size = new System.Drawing.Size(314, 22);
-            this.txtDecryptionKey.TabIndex = 9;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(36, 18);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 14);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Message:";
-            // 
-            // txtMessageDecryption
-            // 
-            this.txtMessageDecryption.Location = new System.Drawing.Point(39, 37);
-            this.txtMessageDecryption.Multiline = true;
-            this.txtMessageDecryption.Name = "txtMessageDecryption";
-            this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
-            this.txtMessageDecryption.TabIndex = 7;
-            // 
             // grbDecoding
             // 
             this.grbDecoding.Controls.Add(this.label6);
@@ -365,6 +303,68 @@
             this.grbDecoding.Size = new System.Drawing.Size(852, 386);
             this.grbDecoding.TabIndex = 14;
             this.grbDecoding.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(505, 178);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(133, 14);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Type of decryption";
+            // 
+            // txtMessageDecryption
+            // 
+            this.txtMessageDecryption.Location = new System.Drawing.Point(39, 37);
+            this.txtMessageDecryption.Multiline = true;
+            this.txtMessageDecryption.Name = "txtMessageDecryption";
+            this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
+            this.txtMessageDecryption.TabIndex = 7;
+            // 
+            // cobDecryptionType
+            // 
+            this.cobDecryptionType.FormattingEnabled = true;
+            this.cobDecryptionType.Location = new System.Drawing.Point(508, 194);
+            this.cobDecryptionType.Name = "cobDecryptionType";
+            this.cobDecryptionType.Size = new System.Drawing.Size(233, 22);
+            this.cobDecryptionType.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(36, 18);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 14);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Message:";
+            // 
+            // brnDecryption
+            // 
+            this.brnDecryption.BackColor = System.Drawing.Color.Lime;
+            this.brnDecryption.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.brnDecryption.Location = new System.Drawing.Point(340, 273);
+            this.brnDecryption.Name = "brnDecryption";
+            this.brnDecryption.Size = new System.Drawing.Size(137, 42);
+            this.brnDecryption.TabIndex = 11;
+            this.brnDecryption.Text = "Decryption";
+            this.brnDecryption.UseVisualStyleBackColor = false;
+            this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
+            // 
+            // txtDecryptionKey
+            // 
+            this.txtDecryptionKey.Location = new System.Drawing.Point(39, 196);
+            this.txtDecryptionKey.Name = "txtDecryptionKey";
+            this.txtDecryptionKey.Size = new System.Drawing.Size(314, 22);
+            this.txtDecryptionKey.TabIndex = 9;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(36, 180);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Key:";
             // 
             // frmMain
             // 
