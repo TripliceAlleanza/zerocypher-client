@@ -5,12 +5,12 @@
     "ExplicitArguments": [
       {
         "Name": "-N",
-        "Description": "Specifie the port name",
+        "Description": "Specifiy the port name",
         "ExplicitArguments": []
       },
       {
         "Name": "-B",
-        "Description": "Specifie the baude rate",
+        "Description": "Specifiy the baude rate",
         "ExplicitArguments": []
       }
     ]
@@ -22,7 +22,7 @@
   },
   {
     "Name": "SerialInfo",
-    "Description": "Retrive information about the serial port",
+    "Description": "Retrives information about the serial port",
     "ExplicitArguments": []
   },
   {
@@ -41,12 +41,12 @@
       },
       {
         "Name": "-K",
-        "Description": "Key used for the encodng",
+        "Description": "iKey used for the encoding",
         "ExplicitArguments": []
       },
       {
         "Name": "-T",
-        "Description": "Type of encryption. 'Caesar' or 'Transposition' ",
+        "Description": "Type of encryption. 'caesar' or 'transposition' ",
         "ExplicitArguments": []
       }
     ]
@@ -57,17 +57,17 @@
     "ExplicitArguments": [
       {
         "Name": "-M",
-        "Description": "Message to Decoding",
+        "Description": "Message to Decode",
         "ExplicitArguments": []
       },
       {
         "Name": "-K",
-        "Description": "Key used for the Decoding",
+        "Description": "Key used to decode the message",
         "ExplicitArguments": []
       },
       {
         "Name": "-T",
-        "Description": "Type of decryption. 'Caesar' or 'Transposition' ",
+        "Description": "Type of decryption. 'caesar' or 'transposition' ",
         "ExplicitArguments": []
       }
     ]

@@ -84,8 +84,9 @@ namespace ZeroCypher {
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
-            //string dr = Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", "");
-            buffer.Append(Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", ""));
+            string dr = Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", "");
+            ConsoleWrite(dr);
+            buffer.Append(dr);
             //ConsoleWrite(dr);
             try {
                 JObject data = JObject.Parse(buffer.ToString());
