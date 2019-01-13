@@ -23,7 +23,7 @@ namespace ZeroCypher {
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
-        private bool Ready = true;
+        private bool Ready = false;
         private long caretPos = 0;
 
         string[] CommadBuffer = new string[20];     //circular buffer
@@ -83,10 +83,12 @@ namespace ZeroCypher {
         private void BlockEncodingAndDecoding() {
             grbEncoding.Enabled = false;
             grbDecoding.Enabled = false;
+            grbCalibration.Enabled = false;
         }
         private void UnlockEncodingAndDecoding() {
             grbEncoding.Enabled = true;
             grbDecoding.Enabled = true;
+            grbCalibration.Enabled = false;
         }
         private void UpdateComboBoxList() {           
             cobEncryptionType.DataSource = GetAlgorithms();
