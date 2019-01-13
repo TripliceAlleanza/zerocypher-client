@@ -24,8 +24,9 @@ namespace CommandParser.Parser {
                 command = command.Remove(command.Length - 1, 1);
                 InformationComm = true;
             }
+            
             string[] values = command.Split(' ');
-           
+
             if (BuiltInCommands.SearchCommand(values[0])) {
                 if (InformationComm) {
                     Information(values);
@@ -123,25 +124,44 @@ namespace CommandParser.Parser {
             Send(comm, false);
         }
         private void Send(string[]comm, bool MODE) {
-            List<string> com = new List<string>();
-            for (int i = 0; i < comm.Length; i++) {
-                if(comm[i] == "-M") {
-                    com.Add(comm[i]);
-                    for (int j = i + 1; j < comm.Length; j++) {
-                        if(comm[j] != "-K" && comm[j] != "-T") {
-
-                        }
-                    }
-                }
-                com.Add(comm[i]);
-            }
-            comm = com.ToArray();
 
             try {
                 if (comm.Length < 7) {
                     WriteInvalidArgument();
                 }
                 else {
+                    List<string> com = comm.ToList();
+                    int first = com.FindIndex(x => x.Contains("\""));
+                    int second = com.FindLastIndex(x => x.Contains("\""));
+                    if(first == second) {
+                        com[first] = com[first].Replace("\"","");
+                        comm = com.ToArray();
+                    }
+                    else {
+                        List<string> temp = new List<string>();
+                        com[first] = com[first].Replace("\"", "");
+                        com[second] = com[second].Replace("\"", "");
+                        for (int i = 0; i < com.Count; i++) {
+                            if(i == first) {
+                                temp.Add(com[i]);
+                                if (first + 1 == second)
+                                    temp.Add(" ");
+                                for (int j = i+1; j < com.Count; j++) {
+                                    if(j != second) {
+                                        temp.Add(" ");
+                                        temp.Add(com[j]);
+                                    }
+                                    else {
+                                        i = j;
+                                        temp.Add(" ");
+                                        break;
+                                    }
+                                }
+                            }
+                            temp.Add(com[i]);
+                        }
+                        comm = temp.ToArray();
+                    }
                     string M = "";
                     string K = "";
                     string T = "";

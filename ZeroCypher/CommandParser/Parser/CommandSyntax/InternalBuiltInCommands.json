@@ -36,17 +36,17 @@
     "ExplicitArguments": [
       {
         "Name": "-M",
-        "Description": "Message to encode",
+        "Description": "\"Message to encode, example: -M \"hi\"",
         "ExplicitArguments": []
       },
       {
         "Name": "-K",
-        "Description": "iKey used for the encoding",
+        "Description": "Key used for the encoding",
         "ExplicitArguments": []
       },
       {
         "Name": "-T",
-        "Description": "Type of encryption. 'caesar' or 'transposition' ",
+        "Description": "Type of encryption. example: cesare or trasposizione ",
         "ExplicitArguments": []
       }
     ]
@@ -57,7 +57,7 @@
     "ExplicitArguments": [
       {
         "Name": "-M",
-        "Description": "Message to Decode",
+        "Description": "\"Message to Decode, example -M \"hi\"",
         "ExplicitArguments": []
       },
       {
