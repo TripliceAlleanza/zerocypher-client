@@ -99,7 +99,7 @@ namespace ZeroCypher {
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
-            string dr = Serial.ReadTo("\n").Replace("\0", "").Replace("\n", "");
+            string dr = Serial.ReadTo("\n").Replace("\0", "").Replace("\r", "");
             ConsoleWrite(dr);
             buffer.Append(dr);
             try {
