@@ -24,7 +24,7 @@ namespace ZeroCypher {
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
-        private bool BlockInput = false;
+        private bool Ready = false;
         private long caretPos = 0;
         public frmMain() {
             InitializeComponent();
@@ -43,8 +43,8 @@ namespace ZeroCypher {
             txtConsole.AppendText(consoletext);
             UpdatePortList();
             UpdateComboBoxList();
-            UnlockEncodingAndDecoding();
             Serial.DataReceived += Serial_DataReceived;
+            BlockEncodingAndDecoding();
 
         }
 
@@ -68,17 +68,12 @@ namespace ZeroCypher {
         }
 
         private void BlockEncodingAndDecoding() {
-            BlockInput = true;
             grbEncoding.Enabled = false;
             grbDecoding.Enabled = false;
-            ConsoleWrite("Arduino is currently writing, wait until it has finish the assigned task.");
-            txtConsole.Enabled = false;
         }
         private void UnlockEncodingAndDecoding() {
-            BlockInput = false; ;
             grbEncoding.Enabled = true;
             grbDecoding.Enabled = true;
-            txtConsole.Enabled = true;
         }
         private void UpdateComboBoxList() {           
             cobEncryptionType.DataSource = GetAlgorithms();
@@ -105,7 +100,7 @@ namespace ZeroCypher {
                     }
                     if(temp.status == "ready.") {
                         UnlockEncodingAndDecoding();
-                        ConsoleWrite($"Device ready to receive new commands");
+                        ConsoleWrite($"Device ready to receive commands");
                     }
                     buffer.Clear();
                 }

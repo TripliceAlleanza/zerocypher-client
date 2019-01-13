@@ -47,22 +47,23 @@
             this.txtEncryptionKey = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtEncMessage = new System.Windows.Forms.TextBox();
-            this.grbEncoding = new System.Windows.Forms.GroupBox();
             this.tabDecoding = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cobDecryptionType = new System.Windows.Forms.ComboBox();
-            this.brnDecryption = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtDecryptionKey = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtMessageDecryption = new System.Windows.Forms.TextBox();
             this.grbDecoding = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtMessageDecryption = new System.Windows.Forms.TextBox();
+            this.cobDecryptionType = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.brnDecryption = new System.Windows.Forms.Button();
+            this.txtDecryptionKey = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.grbEncoding = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.tabEncoding.SuspendLayout();
             this.tabDecoding.SuspendLayout();
             this.grbDecoding.SuspendLayout();
+            this.grbEncoding.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -194,13 +195,6 @@
             // tabEncoding
             // 
             this.tabEncoding.BackColor = System.Drawing.Color.Silver;
-            this.tabEncoding.Controls.Add(this.label5);
-            this.tabEncoding.Controls.Add(this.cobEncryptionType);
-            this.tabEncoding.Controls.Add(this.btnEncrypt);
-            this.tabEncoding.Controls.Add(this.label4);
-            this.tabEncoding.Controls.Add(this.txtEncryptionKey);
-            this.tabEncoding.Controls.Add(this.label3);
-            this.tabEncoding.Controls.Add(this.TxtEncMessage);
             this.tabEncoding.Controls.Add(this.grbEncoding);
             this.tabEncoding.Location = new System.Drawing.Point(4, 23);
             this.tabEncoding.Name = "tabEncoding";
@@ -212,7 +206,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(524, 191);
+            this.label5.Location = new System.Drawing.Point(494, 170);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 14);
             this.label5.TabIndex = 6;
@@ -221,7 +215,7 @@
             // cobEncryptionType
             // 
             this.cobEncryptionType.FormattingEnabled = true;
-            this.cobEncryptionType.Location = new System.Drawing.Point(527, 207);
+            this.cobEncryptionType.Location = new System.Drawing.Point(497, 186);
             this.cobEncryptionType.Name = "cobEncryptionType";
             this.cobEncryptionType.Size = new System.Drawing.Size(233, 22);
             this.cobEncryptionType.TabIndex = 5;
@@ -230,7 +224,7 @@
             // 
             this.btnEncrypt.BackColor = System.Drawing.Color.Lime;
             this.btnEncrypt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEncrypt.Location = new System.Drawing.Point(359, 286);
+            this.btnEncrypt.Location = new System.Drawing.Point(329, 265);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(137, 42);
             this.btnEncrypt.TabIndex = 4;
@@ -241,7 +235,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(55, 193);
+            this.label4.Location = new System.Drawing.Point(25, 172);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 3;
@@ -249,7 +243,7 @@
             // 
             // txtEncryptionKey
             // 
-            this.txtEncryptionKey.Location = new System.Drawing.Point(58, 209);
+            this.txtEncryptionKey.Location = new System.Drawing.Point(28, 188);
             this.txtEncryptionKey.Name = "txtEncryptionKey";
             this.txtEncryptionKey.Size = new System.Drawing.Size(314, 22);
             this.txtEncryptionKey.TabIndex = 2;
@@ -257,7 +251,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(58, 31);
+            this.label3.Location = new System.Drawing.Point(28, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 1;
@@ -265,19 +259,11 @@
             // 
             // TxtEncMessage
             // 
-            this.TxtEncMessage.Location = new System.Drawing.Point(58, 50);
+            this.TxtEncMessage.Location = new System.Drawing.Point(28, 29);
             this.TxtEncMessage.Multiline = true;
             this.TxtEncMessage.Name = "TxtEncMessage";
             this.TxtEncMessage.Size = new System.Drawing.Size(780, 118);
             this.TxtEncMessage.TabIndex = 0;
-            // 
-            // grbEncoding
-            // 
-            this.grbEncoding.Location = new System.Drawing.Point(22, 16);
-            this.grbEncoding.Name = "grbEncoding";
-            this.grbEncoding.Size = new System.Drawing.Size(849, 364);
-            this.grbEncoding.TabIndex = 7;
-            this.grbEncoding.TabStop = false;
             // 
             // tabDecoding
             // 
@@ -288,68 +274,6 @@
             this.tabDecoding.Size = new System.Drawing.Size(895, 504);
             this.tabDecoding.TabIndex = 3;
             this.tabDecoding.Text = "Decoding";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(505, 178);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 14);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Type of decryption";
-            // 
-            // cobDecryptionType
-            // 
-            this.cobDecryptionType.FormattingEnabled = true;
-            this.cobDecryptionType.Location = new System.Drawing.Point(508, 194);
-            this.cobDecryptionType.Name = "cobDecryptionType";
-            this.cobDecryptionType.Size = new System.Drawing.Size(233, 22);
-            this.cobDecryptionType.TabIndex = 12;
-            // 
-            // brnDecryption
-            // 
-            this.brnDecryption.BackColor = System.Drawing.Color.Lime;
-            this.brnDecryption.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.brnDecryption.Location = new System.Drawing.Point(340, 273);
-            this.brnDecryption.Name = "brnDecryption";
-            this.brnDecryption.Size = new System.Drawing.Size(137, 42);
-            this.brnDecryption.TabIndex = 11;
-            this.brnDecryption.Text = "Decryption";
-            this.brnDecryption.UseVisualStyleBackColor = false;
-            this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(36, 180);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 14);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Key:";
-            // 
-            // txtDecryptionKey
-            // 
-            this.txtDecryptionKey.Location = new System.Drawing.Point(39, 196);
-            this.txtDecryptionKey.Name = "txtDecryptionKey";
-            this.txtDecryptionKey.Size = new System.Drawing.Size(314, 22);
-            this.txtDecryptionKey.TabIndex = 9;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(36, 18);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 14);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Message:";
-            // 
-            // txtMessageDecryption
-            // 
-            this.txtMessageDecryption.Location = new System.Drawing.Point(39, 37);
-            this.txtMessageDecryption.Multiline = true;
-            this.txtMessageDecryption.Name = "txtMessageDecryption";
-            this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
-            this.txtMessageDecryption.TabIndex = 7;
             // 
             // grbDecoding
             // 
@@ -366,6 +290,83 @@
             this.grbDecoding.TabIndex = 14;
             this.grbDecoding.TabStop = false;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(505, 178);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(133, 14);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Type of decryption";
+            // 
+            // txtMessageDecryption
+            // 
+            this.txtMessageDecryption.Location = new System.Drawing.Point(39, 37);
+            this.txtMessageDecryption.Multiline = true;
+            this.txtMessageDecryption.Name = "txtMessageDecryption";
+            this.txtMessageDecryption.Size = new System.Drawing.Size(780, 118);
+            this.txtMessageDecryption.TabIndex = 7;
+            // 
+            // cobDecryptionType
+            // 
+            this.cobDecryptionType.FormattingEnabled = true;
+            this.cobDecryptionType.Location = new System.Drawing.Point(508, 194);
+            this.cobDecryptionType.Name = "cobDecryptionType";
+            this.cobDecryptionType.Size = new System.Drawing.Size(233, 22);
+            this.cobDecryptionType.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(36, 18);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 14);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Message:";
+            // 
+            // brnDecryption
+            // 
+            this.brnDecryption.BackColor = System.Drawing.Color.Lime;
+            this.brnDecryption.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.brnDecryption.Location = new System.Drawing.Point(340, 273);
+            this.brnDecryption.Name = "brnDecryption";
+            this.brnDecryption.Size = new System.Drawing.Size(137, 42);
+            this.brnDecryption.TabIndex = 11;
+            this.brnDecryption.Text = "Decryption";
+            this.brnDecryption.UseVisualStyleBackColor = false;
+            this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
+            // 
+            // txtDecryptionKey
+            // 
+            this.txtDecryptionKey.Location = new System.Drawing.Point(39, 196);
+            this.txtDecryptionKey.Name = "txtDecryptionKey";
+            this.txtDecryptionKey.Size = new System.Drawing.Size(314, 22);
+            this.txtDecryptionKey.TabIndex = 9;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(36, 180);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Key:";
+            // 
+            // grbEncoding
+            // 
+            this.grbEncoding.Controls.Add(this.label5);
+            this.grbEncoding.Controls.Add(this.cobEncryptionType);
+            this.grbEncoding.Controls.Add(this.btnEncrypt);
+            this.grbEncoding.Controls.Add(this.label4);
+            this.grbEncoding.Controls.Add(this.txtEncryptionKey);
+            this.grbEncoding.Controls.Add(this.label3);
+            this.grbEncoding.Controls.Add(this.TxtEncMessage);
+            this.grbEncoding.Location = new System.Drawing.Point(24, 21);
+            this.grbEncoding.Name = "grbEncoding";
+            this.grbEncoding.Size = new System.Drawing.Size(843, 375);
+            this.grbEncoding.TabIndex = 7;
+            this.grbEncoding.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -381,10 +382,11 @@
             this.tabPorts.ResumeLayout(false);
             this.tabPorts.PerformLayout();
             this.tabEncoding.ResumeLayout(false);
-            this.tabEncoding.PerformLayout();
             this.tabDecoding.ResumeLayout(false);
             this.grbDecoding.ResumeLayout(false);
             this.grbDecoding.PerformLayout();
+            this.grbEncoding.ResumeLayout(false);
+            this.grbEncoding.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -417,9 +419,9 @@
         private System.Windows.Forms.TextBox txtDecryptionKey;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtMessageDecryption;
-        private System.Windows.Forms.GroupBox grbEncoding;
         private System.Windows.Forms.GroupBox grbDecoding;
         private System.Windows.Forms.Button btnDisconnect;
+        private System.Windows.Forms.GroupBox grbEncoding;
     }
 }
 
