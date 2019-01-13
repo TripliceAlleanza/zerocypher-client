@@ -88,7 +88,7 @@ namespace ZeroCypher {
         private void UnlockEncodingAndDecoding() {
             grbEncoding.Enabled = true;
             grbDecoding.Enabled = true;
-            grbCalibration.Enabled = false;
+            grbCalibration.Enabled = true;
         }
         private void UpdateComboBoxList() {           
             cobEncryptionType.DataSource = GetAlgorithms();
