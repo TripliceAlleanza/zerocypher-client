@@ -41,13 +41,7 @@ namespace ZeroCypher.Models {
         }
 
         public override int GetHashCode() {
-            int hashCode = -5944;
-            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(message);
-            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(key);
-            hashCode = hashCode * -1524 + mode.GetHashCode();
-            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(algorithm);
-            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(status);
-            return Math.Abs(hashCode);
+            return new Random().Next(10000);
         }
 
         public static bool operator ==(Packet packet1, Packet packet2) {
