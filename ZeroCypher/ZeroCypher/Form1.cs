@@ -94,14 +94,17 @@ namespace ZeroCypher {
                     RecivedPacket temp = RecivedPacket.Dserialize(buffer.ToString());
                     if (temp.status == "writing") {
                         BlockEncodingAndDecoding();
+                        Ready = false;
                     }
                     if (temp.status == "done") {
                         ConsoleWrite($"Task: {temp.id} has been completed.");
                         UnlockEncodingAndDecoding();
+                        Ready = true;
                     }
                     if(temp.status == "ready.") {
                         UnlockEncodingAndDecoding();
                         ConsoleWrite($"Device ready to receive commands");
+                        Ready = true;
                     }
                     buffer.Clear();
                 }
@@ -170,12 +173,16 @@ namespace ZeroCypher {
             }
         }
         private void SendData(string msg, int key, string type, bool mode) {
-            if (type == "cesare") {
-                Packet pak = new Packet(msg, key.ToString(), mode, type, "request");
-                pak.SetHashCode();
-                OutputBuffer.Add(pak);
-                Serial.Write(Packet.Serialize(pak, false) + "\n");
-                ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be encrypted, the request ID is: {pak.id} ");
+            if (/*type == "cesare" &&*/ GetAlgorithms().ToList<string>().Find(x => x == type) != null) {
+                if (Ready) {
+                    Packet pak = new Packet(msg, key.ToString(), mode, type, "request");
+                    pak.SetHashCode();
+                    OutputBuffer.Add(pak);
+                    Serial.Write(Packet.Serialize(pak, false) + "\n");
+                    ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be encrypted, the request ID is: {pak.id} ");
+                }
+                else
+                    MessageBox.Show("The arduino isn't ready. please retry.");
             }
             else {
                 string types = "";
@@ -214,11 +221,15 @@ namespace ZeroCypher {
             try {
                 if (Serial.IsOpen) {
                     if (!String.IsNullOrWhiteSpace(txtMessageDecryption.Text) && !String.IsNullOrWhiteSpace(txtDecryptionKey.Text) && !string.IsNullOrWhiteSpace(cobDecryptionType.SelectedItem.ToString())) {
-                        Packet pak = new Packet(txtMessageDecryption.Text, txtDecryptionKey.Text, false, cobDecryptionType.SelectedItem.ToString(), "request");
-                        pak.SetHashCode();
-                        OutputBuffer.Add(pak);
-                        Serial.Write(Packet.Serialize(pak, false) + "\n");
-                        ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be decrypted, the data sent is:\r\n {Packet.Serialize(pak, true)} ");
+                        if (Ready) {
+                            Packet pak = new Packet(txtMessageDecryption.Text, txtDecryptionKey.Text, false, cobDecryptionType.SelectedItem.ToString(), "request");
+                            pak.SetHashCode();
+                            OutputBuffer.Add(pak);
+                            Serial.Write(Packet.Serialize(pak, false) + "\n");
+                            ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be decrypted, the data sent is:\r\n {Packet.Serialize(pak, true)} ");
+                        }
+                        else
+                            MessageBox.Show("The arduino isn't ready. please retry.");
                     }
                 }
                 else {
@@ -283,6 +294,29 @@ namespace ZeroCypher {
             if(Serial.IsOpen)
                 Serial.Close();
             MessageBox.Show("Serial port closed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnSendCalibration_Click(object sender, EventArgs e) {
+            try {
+                int A = Convert.ToInt32(txtA.Text);
+                int Z = Convert.ToInt32(txtZ.Text);
+                if (Ready) {
+                    Packet pak = new Packet(A.ToString() + ";" + Z.ToString(), "Nani", false, "Omae wa mou Shindeiru", "calibration");
+                    pak.SetHashCode();
+                    Serial.Write(Packet.Serialize(pak, false));
+                    MessageBox.Show("Calibration sent successfully.");
+
+                }
+                else {
+                    MessageBox.Show("The arduino isn't ready. please retry.");
+                }
+            }
+            catch (InvalidCastException) {
+                MessageBox.Show("Angle values must be numeric.");
+            }
+            catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

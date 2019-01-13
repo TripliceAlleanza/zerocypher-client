@@ -40,6 +40,7 @@
             this.btnUpdateList = new System.Windows.Forms.Button();
             this.cobPortList = new System.Windows.Forms.ComboBox();
             this.tabEncoding = new System.Windows.Forms.TabPage();
+            this.grbEncoding = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cobEncryptionType = new System.Windows.Forms.ComboBox();
             this.btnEncrypt = new System.Windows.Forms.Button();
@@ -56,14 +57,22 @@
             this.brnDecryption = new System.Windows.Forms.Button();
             this.txtDecryptionKey = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.grbEncoding = new System.Windows.Forms.GroupBox();
+            this.grbPortSetting = new System.Windows.Forms.GroupBox();
+            this.grbCalibration = new System.Windows.Forms.GroupBox();
+            this.lblA = new System.Windows.Forms.Label();
+            this.txtA = new System.Windows.Forms.TextBox();
+            this.txtZ = new System.Windows.Forms.TextBox();
+            this.lblZ = new System.Windows.Forms.Label();
+            this.btnSendCalibration = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.tabEncoding.SuspendLayout();
+            this.grbEncoding.SuspendLayout();
             this.tabDecoding.SuspendLayout();
             this.grbDecoding.SuspendLayout();
-            this.grbEncoding.SuspendLayout();
+            this.grbPortSetting.SuspendLayout();
+            this.grbCalibration.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,25 +116,20 @@
             this.tabPorts.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.tabPorts.BackColor = System.Drawing.Color.Silver;
             this.tabPorts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPorts.Controls.Add(this.btnDisconnect);
-            this.tabPorts.Controls.Add(this.label2);
-            this.tabPorts.Controls.Add(this.label1);
-            this.tabPorts.Controls.Add(this.txtBaudeRate);
-            this.tabPorts.Controls.Add(this.btnConnect);
-            this.tabPorts.Controls.Add(this.btnUpdateList);
-            this.tabPorts.Controls.Add(this.cobPortList);
+            this.tabPorts.Controls.Add(this.grbCalibration);
+            this.tabPorts.Controls.Add(this.grbPortSetting);
             this.tabPorts.Location = new System.Drawing.Point(4, 23);
             this.tabPorts.Name = "tabPorts";
             this.tabPorts.Padding = new System.Windows.Forms.Padding(3);
             this.tabPorts.Size = new System.Drawing.Size(895, 504);
             this.tabPorts.TabIndex = 1;
-            this.tabPorts.Text = "Port Setting";
+            this.tabPorts.Text = "Setting";
             // 
             // btnDisconnect
             // 
             this.btnDisconnect.BackColor = System.Drawing.Color.Red;
             this.btnDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDisconnect.Location = new System.Drawing.Point(315, 147);
+            this.btnDisconnect.Location = new System.Drawing.Point(260, 107);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(86, 23);
             this.btnDisconnect.TabIndex = 6;
@@ -136,7 +140,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(86, 73);
+            this.label2.Location = new System.Drawing.Point(31, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 14);
             this.label2.TabIndex = 5;
@@ -145,15 +149,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 120);
+            this.label1.Location = new System.Drawing.Point(31, 80);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 14);
+            this.label1.Size = new System.Drawing.Size(77, 14);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Baude Rate:";
+            this.label1.Text = "Baud Rate:";
             // 
             // txtBaudeRate
             // 
-            this.txtBaudeRate.Location = new System.Drawing.Point(86, 139);
+            this.txtBaudeRate.Location = new System.Drawing.Point(31, 99);
             this.txtBaudeRate.Name = "txtBaudeRate";
             this.txtBaudeRate.Size = new System.Drawing.Size(100, 22);
             this.txtBaudeRate.TabIndex = 3;
@@ -163,7 +167,7 @@
             // 
             this.btnConnect.BackColor = System.Drawing.Color.Lime;
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnConnect.Location = new System.Drawing.Point(315, 109);
+            this.btnConnect.Location = new System.Drawing.Point(260, 69);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(86, 23);
             this.btnConnect.TabIndex = 2;
@@ -176,7 +180,7 @@
             this.btnUpdateList.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnUpdateList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdateList.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnUpdateList.Location = new System.Drawing.Point(315, 73);
+            this.btnUpdateList.Location = new System.Drawing.Point(260, 33);
             this.btnUpdateList.Name = "btnUpdateList";
             this.btnUpdateList.Size = new System.Drawing.Size(86, 23);
             this.btnUpdateList.TabIndex = 1;
@@ -187,7 +191,7 @@
             // cobPortList
             // 
             this.cobPortList.FormattingEnabled = true;
-            this.cobPortList.Location = new System.Drawing.Point(86, 92);
+            this.cobPortList.Location = new System.Drawing.Point(31, 52);
             this.cobPortList.Name = "cobPortList";
             this.cobPortList.Size = new System.Drawing.Size(156, 22);
             this.cobPortList.TabIndex = 0;
@@ -203,10 +207,25 @@
             this.tabEncoding.TabIndex = 2;
             this.tabEncoding.Text = "Encoding";
             // 
+            // grbEncoding
+            // 
+            this.grbEncoding.Controls.Add(this.label5);
+            this.grbEncoding.Controls.Add(this.cobEncryptionType);
+            this.grbEncoding.Controls.Add(this.btnEncrypt);
+            this.grbEncoding.Controls.Add(this.label4);
+            this.grbEncoding.Controls.Add(this.txtEncryptionKey);
+            this.grbEncoding.Controls.Add(this.label3);
+            this.grbEncoding.Controls.Add(this.TxtEncMessage);
+            this.grbEncoding.Location = new System.Drawing.Point(24, 21);
+            this.grbEncoding.Name = "grbEncoding";
+            this.grbEncoding.Size = new System.Drawing.Size(843, 375);
+            this.grbEncoding.TabIndex = 7;
+            this.grbEncoding.TabStop = false;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(494, 170);
+            this.label5.Location = new System.Drawing.Point(503, 178);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 14);
             this.label5.TabIndex = 6;
@@ -215,7 +234,7 @@
             // cobEncryptionType
             // 
             this.cobEncryptionType.FormattingEnabled = true;
-            this.cobEncryptionType.Location = new System.Drawing.Point(497, 186);
+            this.cobEncryptionType.Location = new System.Drawing.Point(506, 194);
             this.cobEncryptionType.Name = "cobEncryptionType";
             this.cobEncryptionType.Size = new System.Drawing.Size(233, 22);
             this.cobEncryptionType.TabIndex = 5;
@@ -224,7 +243,7 @@
             // 
             this.btnEncrypt.BackColor = System.Drawing.Color.Lime;
             this.btnEncrypt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEncrypt.Location = new System.Drawing.Point(329, 265);
+            this.btnEncrypt.Location = new System.Drawing.Point(338, 273);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(137, 42);
             this.btnEncrypt.TabIndex = 4;
@@ -235,7 +254,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 172);
+            this.label4.Location = new System.Drawing.Point(34, 180);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 3;
@@ -243,7 +262,7 @@
             // 
             // txtEncryptionKey
             // 
-            this.txtEncryptionKey.Location = new System.Drawing.Point(28, 188);
+            this.txtEncryptionKey.Location = new System.Drawing.Point(37, 196);
             this.txtEncryptionKey.Name = "txtEncryptionKey";
             this.txtEncryptionKey.Size = new System.Drawing.Size(314, 22);
             this.txtEncryptionKey.TabIndex = 2;
@@ -251,7 +270,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 10);
+            this.label3.Location = new System.Drawing.Point(34, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 1;
@@ -259,7 +278,7 @@
             // 
             // TxtEncMessage
             // 
-            this.TxtEncMessage.Location = new System.Drawing.Point(28, 29);
+            this.TxtEncMessage.Location = new System.Drawing.Point(37, 37);
             this.TxtEncMessage.Multiline = true;
             this.TxtEncMessage.Name = "TxtEncMessage";
             this.TxtEncMessage.Size = new System.Drawing.Size(780, 118);
@@ -284,9 +303,9 @@
             this.grbDecoding.Controls.Add(this.brnDecryption);
             this.grbDecoding.Controls.Add(this.txtDecryptionKey);
             this.grbDecoding.Controls.Add(this.label7);
-            this.grbDecoding.Location = new System.Drawing.Point(22, 16);
+            this.grbDecoding.Location = new System.Drawing.Point(22, 20);
             this.grbDecoding.Name = "grbDecoding";
-            this.grbDecoding.Size = new System.Drawing.Size(852, 386);
+            this.grbDecoding.Size = new System.Drawing.Size(852, 382);
             this.grbDecoding.TabIndex = 14;
             this.grbDecoding.TabStop = false;
             // 
@@ -352,20 +371,79 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Key:";
             // 
-            // grbEncoding
+            // grbPortSetting
             // 
-            this.grbEncoding.Controls.Add(this.label5);
-            this.grbEncoding.Controls.Add(this.cobEncryptionType);
-            this.grbEncoding.Controls.Add(this.btnEncrypt);
-            this.grbEncoding.Controls.Add(this.label4);
-            this.grbEncoding.Controls.Add(this.txtEncryptionKey);
-            this.grbEncoding.Controls.Add(this.label3);
-            this.grbEncoding.Controls.Add(this.TxtEncMessage);
-            this.grbEncoding.Location = new System.Drawing.Point(24, 21);
-            this.grbEncoding.Name = "grbEncoding";
-            this.grbEncoding.Size = new System.Drawing.Size(843, 375);
-            this.grbEncoding.TabIndex = 7;
-            this.grbEncoding.TabStop = false;
+            this.grbPortSetting.Controls.Add(this.btnDisconnect);
+            this.grbPortSetting.Controls.Add(this.label2);
+            this.grbPortSetting.Controls.Add(this.label1);
+            this.grbPortSetting.Controls.Add(this.txtBaudeRate);
+            this.grbPortSetting.Controls.Add(this.btnConnect);
+            this.grbPortSetting.Controls.Add(this.btnUpdateList);
+            this.grbPortSetting.Controls.Add(this.cobPortList);
+            this.grbPortSetting.Location = new System.Drawing.Point(30, 40);
+            this.grbPortSetting.Name = "grbPortSetting";
+            this.grbPortSetting.Size = new System.Drawing.Size(383, 225);
+            this.grbPortSetting.TabIndex = 7;
+            this.grbPortSetting.TabStop = false;
+            this.grbPortSetting.Text = "Port setting";
+            // 
+            // grbCalibration
+            // 
+            this.grbCalibration.Controls.Add(this.btnSendCalibration);
+            this.grbCalibration.Controls.Add(this.txtZ);
+            this.grbCalibration.Controls.Add(this.lblZ);
+            this.grbCalibration.Controls.Add(this.txtA);
+            this.grbCalibration.Controls.Add(this.lblA);
+            this.grbCalibration.Location = new System.Drawing.Point(470, 40);
+            this.grbCalibration.Name = "grbCalibration";
+            this.grbCalibration.Size = new System.Drawing.Size(392, 225);
+            this.grbCalibration.TabIndex = 8;
+            this.grbCalibration.TabStop = false;
+            this.grbCalibration.Text = "Calibration";
+            // 
+            // lblA
+            // 
+            this.lblA.AutoSize = true;
+            this.lblA.Location = new System.Drawing.Point(18, 33);
+            this.lblA.Name = "lblA";
+            this.lblA.Size = new System.Drawing.Size(119, 14);
+            this.lblA.TabIndex = 0;
+            this.lblA.Text = "Letter \'A\' angle";
+            // 
+            // txtA
+            // 
+            this.txtA.Location = new System.Drawing.Point(21, 52);
+            this.txtA.Name = "txtA";
+            this.txtA.Size = new System.Drawing.Size(100, 22);
+            this.txtA.TabIndex = 1;
+            // 
+            // txtZ
+            // 
+            this.txtZ.Location = new System.Drawing.Point(21, 99);
+            this.txtZ.Name = "txtZ";
+            this.txtZ.Size = new System.Drawing.Size(100, 22);
+            this.txtZ.TabIndex = 3;
+            // 
+            // lblZ
+            // 
+            this.lblZ.AutoSize = true;
+            this.lblZ.Location = new System.Drawing.Point(18, 80);
+            this.lblZ.Name = "lblZ";
+            this.lblZ.Size = new System.Drawing.Size(119, 14);
+            this.lblZ.TabIndex = 2;
+            this.lblZ.Text = "Letter \'Z\' angle";
+            // 
+            // btnSendCalibration
+            // 
+            this.btnSendCalibration.BackColor = System.Drawing.Color.Lime;
+            this.btnSendCalibration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSendCalibration.Location = new System.Drawing.Point(201, 69);
+            this.btnSendCalibration.Name = "btnSendCalibration";
+            this.btnSendCalibration.Size = new System.Drawing.Size(86, 23);
+            this.btnSendCalibration.TabIndex = 4;
+            this.btnSendCalibration.Text = "Calibrate";
+            this.btnSendCalibration.UseVisualStyleBackColor = false;
+            this.btnSendCalibration.Click += new System.EventHandler(this.btnSendCalibration_Click);
             // 
             // frmMain
             // 
@@ -380,13 +458,16 @@
             this.tabControl1.ResumeLayout(false);
             this.tabConsole.ResumeLayout(false);
             this.tabPorts.ResumeLayout(false);
-            this.tabPorts.PerformLayout();
             this.tabEncoding.ResumeLayout(false);
+            this.grbEncoding.ResumeLayout(false);
+            this.grbEncoding.PerformLayout();
             this.tabDecoding.ResumeLayout(false);
             this.grbDecoding.ResumeLayout(false);
             this.grbDecoding.PerformLayout();
-            this.grbEncoding.ResumeLayout(false);
-            this.grbEncoding.PerformLayout();
+            this.grbPortSetting.ResumeLayout(false);
+            this.grbPortSetting.PerformLayout();
+            this.grbCalibration.ResumeLayout(false);
+            this.grbCalibration.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -422,6 +503,13 @@
         private System.Windows.Forms.GroupBox grbDecoding;
         private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.GroupBox grbEncoding;
+        private System.Windows.Forms.GroupBox grbCalibration;
+        private System.Windows.Forms.GroupBox grbPortSetting;
+        private System.Windows.Forms.Button btnSendCalibration;
+        private System.Windows.Forms.TextBox txtZ;
+        private System.Windows.Forms.Label lblZ;
+        private System.Windows.Forms.TextBox txtA;
+        private System.Windows.Forms.Label lblA;
     }
 }
 
