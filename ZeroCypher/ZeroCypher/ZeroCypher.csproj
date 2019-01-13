@@ -70,6 +70,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -90,6 +91,14 @@
       <Project>{bc6c5b22-af14-47c7-b6ef-c31d5ba5d916}</Project>
       <Name>CommandParser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\img_410957.png" />
+    <Content Include="images\img_515158.png" />
+    <Content Include="images\_-71-512.png" />
+    <None Include="Resources\img_515158.png" />
+    <None Include="Resources\img_410957.png" />
+    <None Include="Resources\_-71-512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

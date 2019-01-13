@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommandParser.Interface;
+using CommandParser;
 using CommandParser.Parser.Models;
 using CommandParser.Parser.CommandSyntax;
 using System.Reflection;
