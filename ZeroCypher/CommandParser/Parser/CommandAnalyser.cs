@@ -18,6 +18,9 @@ namespace CommandParser.Parser {
         //public bool TESTING = false;
         private Syntax BuiltInCommands = new Syntax();
 
+        public CommandAnalyser() {
+        }
+
         public void Execute(string command) {
             bool InformationComm = false;
             if (command[command.Length - 1] == '?') {

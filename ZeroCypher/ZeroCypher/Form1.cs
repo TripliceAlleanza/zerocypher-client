@@ -20,12 +20,16 @@ namespace ZeroCypher {
         private string consoletext = "Console --";
         private SerialPort Serial = new SerialPort();
         private StringBuilder buffer = new StringBuilder();
-        private List<String> CommandBuffer = new List<string>();
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
         private bool Ready = true;
         private long caretPos = 0;
+
+        string[] CommadBuffer = new string[20];     //circular buffer
+        byte CircularBufferWriteIndex = 0;
+        byte CircularBufferReadIndex = 0;
+
         public frmMain() {
             InitializeComponent();
         }
@@ -48,6 +52,12 @@ namespace ZeroCypher {
 
         }
 
+        private void AddToCommandBuffer(string text) {
+            if (CommadBuffer[(CircularBufferWriteIndex + CommadBuffer.Length - 1) % CommadBuffer.Length] != text) {
+                CommadBuffer[CircularBufferWriteIndex] = text;
+                CircularBufferWriteIndex = Convert.ToByte((CircularBufferWriteIndex + CommadBuffer.Length + 1) % CommadBuffer.Length);
+            }
+        }
         private void ConsoleWrite(string text) {
             txtConsole.SelectionColor = Color.Cyan;
             //not a ENTER
@@ -65,6 +75,9 @@ namespace ZeroCypher {
             txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText(consoletext); });
             txtConsole.SelectionColor = Color.White;
             caretPos = txtConsole.Lines.GetUpperBound(0);
+        }
+        private void ConsoleBufferWrite(string text) {
+            txtConsole.Invoke((MethodInvoker)delegate { txtConsole.AppendText(text); });
         }
 
         private void BlockEncodingAndDecoding() {
@@ -249,8 +262,12 @@ namespace ZeroCypher {
                 case Keys.Enter:
                     e.Handled = true;
                     string comm = ReadLine();
-                    if (!String.IsNullOrWhiteSpace(comm))
+                    if (!String.IsNullOrWhiteSpace(comm)) {
+                        AddToCommandBuffer(comm);
+                        CircularBufferReadIndex = CircularBufferWriteIndex;
+                        CircularBufferReadIndex--;
                         Console.Execute(comm);
+                    }
                     else
                         ConsoleWrite("");
                     break;
@@ -258,9 +275,39 @@ namespace ZeroCypher {
                     e.Handled = true;
                     e.SuppressKeyPress = true;
                     string temp = ReadLine();
-                    Console.Execute(temp+"?");
+                    Console.Execute(temp + "?");
                     //ConsoleWrite("");
                     txtConsole.AppendText(temp);
+                    break;
+                case Keys.Up:
+                    e.Handled = true;
+                    //txtConsole.Lines[txtConsole.Lines.LongLength- 1] = consoletext;
+                    txtConsole.SelectionStart = txtConsole.GetFirstCharIndexFromLine(txtConsole.Lines.Length - 1);
+                    txtConsole.SelectionLength = txtConsole.Lines[txtConsole.Lines.Length - 1].Length + 1;
+                    txtConsole.SelectedText = String.Empty;
+                    for (int i = 0; i < CommadBuffer.Length; i++) {
+                        if (CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length] != null) {
+                            var testing = (CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length;
+                            ConsoleBufferWrite(consoletext + CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length]);
+                            CircularBufferReadIndex = Convert.ToByte((CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length);
+                            break;
+                        }
+                        CircularBufferReadIndex = Convert.ToByte((CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length);
+                    }
+                    break;
+                case Keys.Down:
+                    txtConsole.SelectionStart = txtConsole.GetFirstCharIndexFromLine(txtConsole.Lines.Length - 1);
+                    txtConsole.SelectionLength = txtConsole.Lines[txtConsole.Lines.Length - 1].Length + 1;
+                    txtConsole.SelectedText = String.Empty;
+                    for (int i = 0; i < CommadBuffer.Length; i++) {
+                        if (CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length] != null) {
+                            var testing = (CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length;
+                            ConsoleBufferWrite(consoletext + CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length]);
+                            CircularBufferReadIndex = Convert.ToByte((CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length);
+                            break;
+                        }
+                        CircularBufferReadIndex = Convert.ToByte((CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length);
+                    }
                     break;
             }
         }
