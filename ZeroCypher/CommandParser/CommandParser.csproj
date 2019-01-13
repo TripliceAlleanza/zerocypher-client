@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\ICommandParser.cs" />
     <Compile Include="Parser\CommandAnalyser.cs" />
     <Compile Include="Parser\CommandSyntax\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

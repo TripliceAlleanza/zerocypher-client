@@ -11,7 +11,6 @@ using System.IO.Ports;
 using ZeroCypher.Models;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Linq;
-using CommandParser.Interface;
 using CommandParser.Parser;
 using CommandParser.Parser.Models;
 
