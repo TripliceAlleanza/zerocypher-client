@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroCypher", "ZeroCypher\ZeroCypher.csproj", "{C794648F-B297-4832-B8E1-3772505EC1C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{70877F01-94EB-4B05-92DB-3B8A66C15B1A} = {70877F01-94EB-4B05-92DB-3B8A66C15B1A}
+		{810F3EE4-69DB-441F-9C38-A1A89EF702C0} = {810F3EE4-69DB-441F-9C38-A1A89EF702C0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandParser", "CommandParser\CommandParser.csproj", "{BC6C5B22-AF14-47C7-B6EF-C31D5BA5D916}"
 EndProject

@@ -381,5 +381,13 @@
                 MessageBox.Show("Serial post is closed, please connect first.");
             }
         }
+
+        private void label1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void txtBaudeRate_TextChanged(object sender, EventArgs e) {
+
+        }
     }
 }
