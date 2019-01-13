@@ -321,11 +321,16 @@ namespace ZeroCypher {
         }
 
         private void btnShowAlphabet_Click(object sender, EventArgs e) {
-            var pak = new Packet("any", "any", true, "showalphabet", "request");
-            pak.SetHashCode();
-            string str = Packet.Serialize(pak, false);
-            ConsoleWrite(str);
-            Serial.Write(str);
+            if (Serial.IsOpen) {
+                var pak = new Packet("any", "any", true, "showalphabet", "request");
+                pak.SetHashCode();
+                string str = Packet.Serialize(pak, false);
+                ConsoleWrite(str);
+                Serial.Write(str);
+            }
+            else {
+                MessageBox.Show("Serial post is closed, please connect first.");
+            }
         }
     }
 }

@@ -41,12 +41,12 @@ namespace ZeroCypher.Models {
         }
 
         public override int GetHashCode() {
-            int hashCode = -59434;
-            hashCode = hashCode * -152114 + EqualityComparer<string>.Default.GetHashCode(message);
-            hashCode = hashCode * -152114 + EqualityComparer<string>.Default.GetHashCode(key);
-            hashCode = hashCode * -152114 + mode.GetHashCode();
-            hashCode = hashCode * -152114 + EqualityComparer<string>.Default.GetHashCode(algorithm);
-            hashCode = hashCode * -152114 + EqualityComparer<string>.Default.GetHashCode(status);
+            int hashCode = -5944;
+            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(message);
+            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(key);
+            hashCode = hashCode * -1524 + mode.GetHashCode();
+            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(algorithm);
+            hashCode = hashCode * -1524 + EqualityComparer<string>.Default.GetHashCode(status);
             return Math.Abs(hashCode);
         }
 
