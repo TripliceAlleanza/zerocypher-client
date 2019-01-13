@@ -128,6 +128,8 @@ namespace ZeroCypher {
         private void UpdatePortList() {
             cobPortList.Items.Clear();
             cobPortList.Items.AddRange(SerialPort.GetPortNames());
+            if (cobPortList.Items.Count > 1)
+                cobPortList.SelectedIndex = 1;
         }
 
         private void btnUpdateList_Click(object sender, EventArgs e) {
