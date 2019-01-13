@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿namespace ZeroCypher.Models {
+    using System;
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
 
-namespace ZeroCypher.Models {
-   public class Packet {
+    public class Packet {
 
         public int id { get; set; }
         public string message { get; set; }
@@ -20,9 +17,9 @@ namespace ZeroCypher.Models {
         }
 
         public Packet(string msg, string key, bool mod, string algorithm, string status) {
-            this.message = msg;
+            message = msg;
             this.key = key;
-            this.mode = mod;
+            mode = mod;
             this.algorithm = algorithm;
             this.status = status;
         }
@@ -52,11 +49,11 @@ namespace ZeroCypher.Models {
             return !(packet1 == packet2);
         }
 
-        public static string Serialize(Packet pak, bool indent) {
+        public static string Serialize(Packet pak, bool indent)
+        {
             if (indent)
                 return JsonConvert.SerializeObject(pak, Formatting.Indented);
-            else
-                return JsonConvert.SerializeObject(pak, Formatting.None);
+            return JsonConvert.SerializeObject(pak, Formatting.None);
         }
         public static Packet Dserialize(string pak) {
             return JsonConvert.DeserializeObject<Packet>(pak);

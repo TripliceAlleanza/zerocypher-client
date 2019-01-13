@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using CommandParser.Parser.Models;
-using Newtonsoft.Json;
+﻿namespace CommandBuilder {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Windows.Forms;
+    using CommandParser.Parser.Models;
+    using Newtonsoft.Json;
 
-namespace CommandBuilder {
     public partial class frmMain : Form {
         List<Command> CommandList;
         public frmMain() {

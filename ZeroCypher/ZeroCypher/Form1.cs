@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO.Ports;
-using ZeroCypher.Models;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Linq;
-using CommandParser.Parser;
-using CommandParser.Parser.Models;
+﻿namespace ZeroCypher {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO.Ports;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+    using CommandParser.Parser;
+    using Models;
+    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json.Schema;
 
-namespace ZeroCypher {
     public partial class frmMain : Form {
         private string consoletext = "Console --";
         private SerialPort Serial = new SerialPort();
@@ -22,12 +18,12 @@ namespace ZeroCypher {
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
-        private bool Ready = false;
-        private long caretPos = 0;
+        private bool Ready;
+        private long caretPos;
 
         string[] CommadBuffer = new string[20];     //circular buffer
-        byte CircularBufferWriteIndex = 0;
-        byte CircularBufferReadIndex = 0;
+        byte CircularBufferWriteIndex;
+        byte CircularBufferReadIndex;
 
         public frmMain() {
             InitializeComponent();
@@ -94,7 +90,7 @@ namespace ZeroCypher {
             cobDecryptionType.DataSource = GetAlgorithms();
         }
         private string[] GetAlgorithms() {
-            return new string[] { "cesare", "trasposizione", "testo"};
+            return new[] { "cesare", "trasposizione", "testo"};
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
@@ -122,7 +118,7 @@ namespace ZeroCypher {
                     buffer.Clear();
                 }
             }catch(Exception ex) {
-                MessageBox.Show($"Message: {ex.Message}\n\n Source:{ex.Source}\n\n Stack Trace:{ex.StackTrace}\n\n Target using reflection{ex.TargetSite.ToString()}");
+                MessageBox.Show($"Message: {ex.Message}\n\n Source:{ex.Source}\n\n Stack Trace:{ex.StackTrace}\n\n Target using reflection{ex.TargetSite}");
             }
         }
 
@@ -160,7 +156,7 @@ namespace ZeroCypher {
                 Serial.Open();
                 MessageBox.Show("Serial port opened successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             } catch(Exception e) {
-                MessageBox.Show($"Can't open serial port {Serial.PortName}, {e.ToString()}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Can't open serial port {Serial.PortName}, {e}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             
@@ -190,11 +186,11 @@ namespace ZeroCypher {
             }
         }
         private void SendData(string msg, string key, string type, bool mode) {
-            if (/*type == "cesare" &&*/ GetAlgorithms().ToList<string>().Find(x => x == type) != null) {
+            if (/*type == "cesare" &&*/ GetAlgorithms().ToList().Find(x => x == type) != null) {
                 if (Ready) {
                     int n;
                     if (type == "cesare" && int.TryParse(key, out n) || type == "trasposizione" && !int.TryParse(key, out n)) {
-                        Packet pak = new Packet(msg, key.ToString(), mode, type, "request");
+                        Packet pak = new Packet(msg, key, mode, type, "request");
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
                         Serial.Write(Packet.Serialize(pak, false) + "\n");
@@ -295,8 +291,7 @@ namespace ZeroCypher {
                     txtConsole.SelectionLength = txtConsole.Lines[txtConsole.Lines.Length - 1].Length + 1;
                     txtConsole.SelectedText = String.Empty;
                     for (int i = 0; i < CommadBuffer.Length; i++) {
-                        if (CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length] != null) {
-                            var testing = (CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length;
+                        if (CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length] != null) {                          
                             ConsoleBufferWrite(consoletext + CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length]);
                             CircularBufferReadIndex = Convert.ToByte((CircularBufferReadIndex + CommadBuffer.Length - 1) % CommadBuffer.Length);
                             break;
@@ -310,7 +305,6 @@ namespace ZeroCypher {
                     txtConsole.SelectedText = String.Empty;
                     for (int i = 0; i < CommadBuffer.Length; i++) {
                         if (CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length] != null) {
-                            var testing = (CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length;
                             ConsoleBufferWrite(consoletext + CommadBuffer[(CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length]);
                             CircularBufferReadIndex = Convert.ToByte((CircularBufferReadIndex + CommadBuffer.Length + 1) % CommadBuffer.Length);
                             break;
@@ -358,7 +352,7 @@ namespace ZeroCypher {
                 int A = Convert.ToInt32(txtA.Text);
                 int Z = Convert.ToInt32(txtZ.Text);
                 if (Ready) {
-                    Packet pak = new Packet(A.ToString() + ";" + Z.ToString(), "Nani", false, "Omae wa mou Shindeiru", "calibration");
+                    Packet pak = new Packet(A + ";" + Z, "Nani", false, "Omae wa mou Shindeiru", "calibration");
                     pak.SetHashCode();
                     Serial.Write(Packet.Serialize(pak, false));
 

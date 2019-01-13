@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CommandParser.Parser;
+﻿namespace CommandParserUnitTest {
+    using System;
+    using CommandParser.Parser;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CommandParserUnitTest {
     [TestClass]
     public class ParsingTest {
         [TestMethod]

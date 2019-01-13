@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommandParser.Parser.Models;
-using CommandParser.Parser.CommandSyntax;
-using System.Reflection;
-namespace CommandParser.Parser {
+﻿namespace CommandParser.Parser {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using CommandSyntax;
+    using Models;
+
     //[AttributeUsage(AttributeTargets.All)]
-    public class CommandAnalyser : System.Attribute {
+    public class CommandAnalyser : Attribute {
         public Delegates.ConsoleWrite Write;
         public Delegates.SerialOpenConnection OpenConnection;
         public Delegates.SerialCloseConnection CloseConnection;
@@ -16,9 +15,6 @@ namespace CommandParser.Parser {
         public Delegates.SerialInfo Serialinfo;
         //public bool TESTING = false;
         private Syntax BuiltInCommands = new Syntax();
-
-        public CommandAnalyser() {
-        }
 
         public void Execute(string command) {
             bool InformationComm = false;

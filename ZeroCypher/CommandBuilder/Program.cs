@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿namespace CommandBuilder {
+    using System;
+    using System.Windows.Forms;
 
-namespace CommandBuilder {
     static class Program {
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
