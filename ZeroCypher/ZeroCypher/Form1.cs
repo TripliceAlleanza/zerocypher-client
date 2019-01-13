@@ -84,15 +84,14 @@ namespace ZeroCypher {
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
-            string dr = Serial.ReadTo("\n\r").Replace("\0", "").Replace("\n", "");
+            string dr = Serial.ReadTo("\n").Replace("\0", "").Replace("\n", "");
             ConsoleWrite(dr);
             buffer.Append(dr);
-            //ConsoleWrite(dr);
             try {
                 JObject data = JObject.Parse(buffer.ToString());
                 if (data.IsValid(JsonPacketValidator)) {
                     RecivedPacket temp = RecivedPacket.Dserialize(buffer.ToString());
-                    if (temp.status == "writing") {
+                    if (temp.status == "writing" || temp.status == "wait") {
                         BlockEncodingAndDecoding();
                         Ready = false;
                     }
@@ -128,6 +127,8 @@ namespace ZeroCypher {
                     Serial.PortName = cobPortList.SelectedItem.ToString();
                     Serial.BaudRate = Convert.ToInt32(txtBaudeRate.Text);
                     Connect();
+                    var pak = new Packet("","",false,"","ping");
+                    Serial.Write(Packet.Serialize(pak, true));
                 }
                 else
                     MessageBox.Show("Fill all the values before connecting", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -317,6 +318,14 @@ namespace ZeroCypher {
             catch(Exception ex) {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnShowAlphabet_Click(object sender, EventArgs e) {
+            var pak = new Packet("any", "any", true, "showalphabet", "request");
+            pak.SetHashCode();
+            string str = Packet.Serialize(pak, false);
+            ConsoleWrite(str);
+            Serial.Write(str);
         }
     }
 }
