@@ -33,6 +33,7 @@
             this.txtConsole = new System.Windows.Forms.RichTextBox();
             this.tabPorts = new System.Windows.Forms.TabPage();
             this.grbCalibration = new System.Windows.Forms.GroupBox();
+            this.btnShowAlphabet = new System.Windows.Forms.Button();
             this.btnSendCalibration = new System.Windows.Forms.Button();
             this.txtZ = new System.Windows.Forms.TextBox();
             this.lblZ = new System.Windows.Forms.Label();
@@ -64,7 +65,6 @@
             this.brnDecryption = new System.Windows.Forms.Button();
             this.txtDecryptionKey = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnShowAlphabet = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
@@ -78,8 +78,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabConsole);
             this.tabControl1.Controls.Add(this.tabPorts);
+            this.tabControl1.Controls.Add(this.tabConsole);
             this.tabControl1.Controls.Add(this.tabEncoding);
             this.tabControl1.Controls.Add(this.tabDecoding);
             this.tabControl1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -140,6 +140,18 @@
             this.grbCalibration.TabIndex = 8;
             this.grbCalibration.TabStop = false;
             this.grbCalibration.Text = "Calibration";
+            // 
+            // btnShowAlphabet
+            // 
+            this.btnShowAlphabet.BackColor = System.Drawing.Color.Lime;
+            this.btnShowAlphabet.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnShowAlphabet.Location = new System.Drawing.Point(147, 143);
+            this.btnShowAlphabet.Name = "btnShowAlphabet";
+            this.btnShowAlphabet.Size = new System.Drawing.Size(86, 43);
+            this.btnShowAlphabet.TabIndex = 5;
+            this.btnShowAlphabet.Text = "Show Alphabet";
+            this.btnShowAlphabet.UseVisualStyleBackColor = false;
+            this.btnShowAlphabet.Click += new System.EventHandler(this.btnShowAlphabet_Click);
             // 
             // btnSendCalibration
             // 
@@ -281,7 +293,7 @@
             this.tabEncoding.Padding = new System.Windows.Forms.Padding(3);
             this.tabEncoding.Size = new System.Drawing.Size(895, 504);
             this.tabEncoding.TabIndex = 2;
-            this.tabEncoding.Text = "Encoding";
+            this.tabEncoding.Text = "Encrypting";
             // 
             // grbEncoding
             // 
@@ -368,7 +380,7 @@
             this.tabDecoding.Name = "tabDecoding";
             this.tabDecoding.Size = new System.Drawing.Size(895, 504);
             this.tabDecoding.TabIndex = 3;
-            this.tabDecoding.Text = "Decoding";
+            this.tabDecoding.Text = "Decrypting";
             // 
             // grbDecoding
             // 
@@ -427,7 +439,7 @@
             this.brnDecryption.Name = "brnDecryption";
             this.brnDecryption.Size = new System.Drawing.Size(137, 42);
             this.brnDecryption.TabIndex = 11;
-            this.brnDecryption.Text = "Decryption";
+            this.brnDecryption.Text = "Decrypt";
             this.brnDecryption.UseVisualStyleBackColor = false;
             this.brnDecryption.Click += new System.EventHandler(this.brnDecryption_Click);
             // 
@@ -446,18 +458,6 @@
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10;
             this.label7.Text = "Key:";
-            // 
-            // btnShowAlphabet
-            // 
-            this.btnShowAlphabet.BackColor = System.Drawing.Color.Lime;
-            this.btnShowAlphabet.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShowAlphabet.Location = new System.Drawing.Point(147, 143);
-            this.btnShowAlphabet.Name = "btnShowAlphabet";
-            this.btnShowAlphabet.Size = new System.Drawing.Size(86, 43);
-            this.btnShowAlphabet.TabIndex = 5;
-            this.btnShowAlphabet.Text = "Show Alphabet";
-            this.btnShowAlphabet.UseVisualStyleBackColor = false;
-            this.btnShowAlphabet.Click += new System.EventHandler(this.btnShowAlphabet_Click);
             // 
             // frmMain
             // 
