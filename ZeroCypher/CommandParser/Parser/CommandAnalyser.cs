@@ -220,7 +220,7 @@ namespace CommandParser.Parser {
                     }
                     if (AllDone == 3)
                         try {
-                            SendData(M, Convert.ToInt32(K), T, MODE);
+                            SendData(M, K, T, MODE);
                         }
                         catch (InvalidCastException) {
                             Write("THE KEY ARGUMENT MUST BE NUMERIC");

@@ -188,14 +188,20 @@ namespace ZeroCypher {
                 ConsoleWrite(ex.Message + "\n");
             }
         }
-        private void SendData(string msg, int key, string type, bool mode) {
+        private void SendData(string msg, string key, string type, bool mode) {
             if (/*type == "cesare" &&*/ GetAlgorithms().ToList<string>().Find(x => x == type) != null) {
                 if (Ready) {
-                    Packet pak = new Packet(msg, key.ToString(), mode, type, "request");
-                    pak.SetHashCode();
-                    OutputBuffer.Add(pak);
-                    Serial.Write(Packet.Serialize(pak, false) + "\n");
-                    ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be encrypted, the request ID is: {pak.id} ");
+                    int n;
+                    if (type == "cesare" && int.TryParse(key, out n) || type == "trasposizione" && !int.TryParse(key, out n)) {
+                        Packet pak = new Packet(msg, key.ToString(), mode, type, "request");
+                        pak.SetHashCode();
+                        OutputBuffer.Add(pak);
+                        Serial.Write(Packet.Serialize(pak, false) + "\n");
+                        ConsoleWrite($"Data sent to port: '{Serial.PortName}', to be encrypted, the request ID is: {pak.id} ");
+                    }
+                    else {
+                        ConsoleWrite("cesare requires a numeric key and transposizione requires a non numeric key.");
+                    }
                 }
                 else
                     MessageBox.Show("The arduino isn't ready. please retry.");
