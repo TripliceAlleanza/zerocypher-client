@@ -95,7 +95,7 @@ namespace ZeroCypher {
             cobDecryptionType.DataSource = GetAlgorithms();
         }
         private string[] GetAlgorithms() {
-            return new string[] { "cesare", "trasposizione"};
+            return new string[] { "cesare", "trasposizione", "testo"};
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
@@ -130,6 +130,8 @@ namespace ZeroCypher {
         private void UpdatePortList() {
             cobPortList.Items.Clear();
             cobPortList.Items.AddRange(SerialPort.GetPortNames());
+            if (cobPortList.Items.Count > 1)
+                cobPortList.SelectedIndex = 1;
         }
 
         private void btnUpdateList_Click(object sender, EventArgs e) {
@@ -222,7 +224,7 @@ namespace ZeroCypher {
         private void btnEncrypt_Click(object sender, EventArgs e) {
             try {
                 if (Serial.IsOpen) {
-                    if (!String.IsNullOrWhiteSpace(TxtEncMessage.Text) && !String.IsNullOrWhiteSpace(txtEncryptionKey.Text) && !string.IsNullOrWhiteSpace(cobEncryptionType.SelectedItem.ToString())) {
+                    if (!String.IsNullOrWhiteSpace(TxtEncMessage.Text) && (!String.IsNullOrWhiteSpace(txtEncryptionKey.Text) || cobEncryptionType.Text == "testo") && !string.IsNullOrWhiteSpace(cobEncryptionType.SelectedItem.ToString())) {
                         Packet pak = new Packet(TxtEncMessage.Text, txtEncryptionKey.Text, true, cobEncryptionType.SelectedItem.ToString(), "request");
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
@@ -360,15 +362,14 @@ namespace ZeroCypher {
                     Packet pak = new Packet(A.ToString() + ";" + Z.ToString(), "Nani", false, "Omae wa mou Shindeiru", "calibration");
                     pak.SetHashCode();
                     Serial.Write(Packet.Serialize(pak, false));
-                    MessageBox.Show("Calibration sent successfully.");
 
                 }
                 else {
-                    MessageBox.Show("The arduino isn't ready. please retry.");
+                    MessageBox.Show("The arduino isn't ready. please retry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (InvalidCastException) {
-                MessageBox.Show("Angle values must be numeric.");
+                MessageBox.Show("Angle values must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch(Exception ex) {
                 MessageBox.Show(ex.Message);
