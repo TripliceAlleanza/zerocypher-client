@@ -24,7 +24,7 @@ namespace ZeroCypher {
         private List<Packet> OutputBuffer = new List<Packet>();
         JsonSchema JsonPacketValidator = new JsonSchemaGenerator().Generate(typeof(RecivedPacket));
         private CommandAnalyser Console = new CommandAnalyser();
-        private bool Ready = false;
+        private bool Ready = true;
         private long caretPos = 0;
         public frmMain() {
             InitializeComponent();
