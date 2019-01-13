@@ -32,6 +32,13 @@
             this.tabConsole = new System.Windows.Forms.TabPage();
             this.txtConsole = new System.Windows.Forms.RichTextBox();
             this.tabPorts = new System.Windows.Forms.TabPage();
+            this.grbCalibration = new System.Windows.Forms.GroupBox();
+            this.btnSendCalibration = new System.Windows.Forms.Button();
+            this.txtZ = new System.Windows.Forms.TextBox();
+            this.lblZ = new System.Windows.Forms.Label();
+            this.txtA = new System.Windows.Forms.TextBox();
+            this.lblA = new System.Windows.Forms.Label();
+            this.grbPortSetting = new System.Windows.Forms.GroupBox();
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,22 +64,16 @@
             this.brnDecryption = new System.Windows.Forms.Button();
             this.txtDecryptionKey = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.grbPortSetting = new System.Windows.Forms.GroupBox();
-            this.grbCalibration = new System.Windows.Forms.GroupBox();
-            this.lblA = new System.Windows.Forms.Label();
-            this.txtA = new System.Windows.Forms.TextBox();
-            this.txtZ = new System.Windows.Forms.TextBox();
-            this.lblZ = new System.Windows.Forms.Label();
-            this.btnSendCalibration = new System.Windows.Forms.Button();
+            this.btnShowAlphabet = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConsole.SuspendLayout();
             this.tabPorts.SuspendLayout();
+            this.grbCalibration.SuspendLayout();
+            this.grbPortSetting.SuspendLayout();
             this.tabEncoding.SuspendLayout();
             this.grbEncoding.SuspendLayout();
             this.tabDecoding.SuspendLayout();
             this.grbDecoding.SuspendLayout();
-            this.grbPortSetting.SuspendLayout();
-            this.grbCalibration.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -124,6 +125,81 @@
             this.tabPorts.Size = new System.Drawing.Size(895, 504);
             this.tabPorts.TabIndex = 1;
             this.tabPorts.Text = "Setting";
+            // 
+            // grbCalibration
+            // 
+            this.grbCalibration.Controls.Add(this.btnShowAlphabet);
+            this.grbCalibration.Controls.Add(this.btnSendCalibration);
+            this.grbCalibration.Controls.Add(this.txtZ);
+            this.grbCalibration.Controls.Add(this.lblZ);
+            this.grbCalibration.Controls.Add(this.txtA);
+            this.grbCalibration.Controls.Add(this.lblA);
+            this.grbCalibration.Location = new System.Drawing.Point(470, 40);
+            this.grbCalibration.Name = "grbCalibration";
+            this.grbCalibration.Size = new System.Drawing.Size(392, 225);
+            this.grbCalibration.TabIndex = 8;
+            this.grbCalibration.TabStop = false;
+            this.grbCalibration.Text = "Calibration";
+            // 
+            // btnSendCalibration
+            // 
+            this.btnSendCalibration.BackColor = System.Drawing.Color.Lime;
+            this.btnSendCalibration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSendCalibration.Location = new System.Drawing.Point(201, 69);
+            this.btnSendCalibration.Name = "btnSendCalibration";
+            this.btnSendCalibration.Size = new System.Drawing.Size(86, 23);
+            this.btnSendCalibration.TabIndex = 4;
+            this.btnSendCalibration.Text = "Calibrate";
+            this.btnSendCalibration.UseVisualStyleBackColor = false;
+            this.btnSendCalibration.Click += new System.EventHandler(this.btnSendCalibration_Click);
+            // 
+            // txtZ
+            // 
+            this.txtZ.Location = new System.Drawing.Point(21, 99);
+            this.txtZ.Name = "txtZ";
+            this.txtZ.Size = new System.Drawing.Size(100, 22);
+            this.txtZ.TabIndex = 3;
+            // 
+            // lblZ
+            // 
+            this.lblZ.AutoSize = true;
+            this.lblZ.Location = new System.Drawing.Point(18, 80);
+            this.lblZ.Name = "lblZ";
+            this.lblZ.Size = new System.Drawing.Size(119, 14);
+            this.lblZ.TabIndex = 2;
+            this.lblZ.Text = "Letter \'Z\' angle";
+            // 
+            // txtA
+            // 
+            this.txtA.Location = new System.Drawing.Point(21, 52);
+            this.txtA.Name = "txtA";
+            this.txtA.Size = new System.Drawing.Size(100, 22);
+            this.txtA.TabIndex = 1;
+            // 
+            // lblA
+            // 
+            this.lblA.AutoSize = true;
+            this.lblA.Location = new System.Drawing.Point(18, 33);
+            this.lblA.Name = "lblA";
+            this.lblA.Size = new System.Drawing.Size(119, 14);
+            this.lblA.TabIndex = 0;
+            this.lblA.Text = "Letter \'A\' angle";
+            // 
+            // grbPortSetting
+            // 
+            this.grbPortSetting.Controls.Add(this.btnDisconnect);
+            this.grbPortSetting.Controls.Add(this.label2);
+            this.grbPortSetting.Controls.Add(this.label1);
+            this.grbPortSetting.Controls.Add(this.txtBaudeRate);
+            this.grbPortSetting.Controls.Add(this.btnConnect);
+            this.grbPortSetting.Controls.Add(this.btnUpdateList);
+            this.grbPortSetting.Controls.Add(this.cobPortList);
+            this.grbPortSetting.Location = new System.Drawing.Point(30, 40);
+            this.grbPortSetting.Name = "grbPortSetting";
+            this.grbPortSetting.Size = new System.Drawing.Size(383, 225);
+            this.grbPortSetting.TabIndex = 7;
+            this.grbPortSetting.TabStop = false;
+            this.grbPortSetting.Text = "Port setting";
             // 
             // btnDisconnect
             // 
@@ -371,79 +447,17 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Key:";
             // 
-            // grbPortSetting
+            // btnShowAlphabet
             // 
-            this.grbPortSetting.Controls.Add(this.btnDisconnect);
-            this.grbPortSetting.Controls.Add(this.label2);
-            this.grbPortSetting.Controls.Add(this.label1);
-            this.grbPortSetting.Controls.Add(this.txtBaudeRate);
-            this.grbPortSetting.Controls.Add(this.btnConnect);
-            this.grbPortSetting.Controls.Add(this.btnUpdateList);
-            this.grbPortSetting.Controls.Add(this.cobPortList);
-            this.grbPortSetting.Location = new System.Drawing.Point(30, 40);
-            this.grbPortSetting.Name = "grbPortSetting";
-            this.grbPortSetting.Size = new System.Drawing.Size(383, 225);
-            this.grbPortSetting.TabIndex = 7;
-            this.grbPortSetting.TabStop = false;
-            this.grbPortSetting.Text = "Port setting";
-            // 
-            // grbCalibration
-            // 
-            this.grbCalibration.Controls.Add(this.btnSendCalibration);
-            this.grbCalibration.Controls.Add(this.txtZ);
-            this.grbCalibration.Controls.Add(this.lblZ);
-            this.grbCalibration.Controls.Add(this.txtA);
-            this.grbCalibration.Controls.Add(this.lblA);
-            this.grbCalibration.Location = new System.Drawing.Point(470, 40);
-            this.grbCalibration.Name = "grbCalibration";
-            this.grbCalibration.Size = new System.Drawing.Size(392, 225);
-            this.grbCalibration.TabIndex = 8;
-            this.grbCalibration.TabStop = false;
-            this.grbCalibration.Text = "Calibration";
-            // 
-            // lblA
-            // 
-            this.lblA.AutoSize = true;
-            this.lblA.Location = new System.Drawing.Point(18, 33);
-            this.lblA.Name = "lblA";
-            this.lblA.Size = new System.Drawing.Size(119, 14);
-            this.lblA.TabIndex = 0;
-            this.lblA.Text = "Letter \'A\' angle";
-            // 
-            // txtA
-            // 
-            this.txtA.Location = new System.Drawing.Point(21, 52);
-            this.txtA.Name = "txtA";
-            this.txtA.Size = new System.Drawing.Size(100, 22);
-            this.txtA.TabIndex = 1;
-            // 
-            // txtZ
-            // 
-            this.txtZ.Location = new System.Drawing.Point(21, 99);
-            this.txtZ.Name = "txtZ";
-            this.txtZ.Size = new System.Drawing.Size(100, 22);
-            this.txtZ.TabIndex = 3;
-            // 
-            // lblZ
-            // 
-            this.lblZ.AutoSize = true;
-            this.lblZ.Location = new System.Drawing.Point(18, 80);
-            this.lblZ.Name = "lblZ";
-            this.lblZ.Size = new System.Drawing.Size(119, 14);
-            this.lblZ.TabIndex = 2;
-            this.lblZ.Text = "Letter \'Z\' angle";
-            // 
-            // btnSendCalibration
-            // 
-            this.btnSendCalibration.BackColor = System.Drawing.Color.Lime;
-            this.btnSendCalibration.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSendCalibration.Location = new System.Drawing.Point(201, 69);
-            this.btnSendCalibration.Name = "btnSendCalibration";
-            this.btnSendCalibration.Size = new System.Drawing.Size(86, 23);
-            this.btnSendCalibration.TabIndex = 4;
-            this.btnSendCalibration.Text = "Calibrate";
-            this.btnSendCalibration.UseVisualStyleBackColor = false;
-            this.btnSendCalibration.Click += new System.EventHandler(this.btnSendCalibration_Click);
+            this.btnShowAlphabet.BackColor = System.Drawing.Color.Lime;
+            this.btnShowAlphabet.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnShowAlphabet.Location = new System.Drawing.Point(147, 143);
+            this.btnShowAlphabet.Name = "btnShowAlphabet";
+            this.btnShowAlphabet.Size = new System.Drawing.Size(86, 43);
+            this.btnShowAlphabet.TabIndex = 5;
+            this.btnShowAlphabet.Text = "Show Alphabet";
+            this.btnShowAlphabet.UseVisualStyleBackColor = false;
+            this.btnShowAlphabet.Click += new System.EventHandler(this.btnShowAlphabet_Click);
             // 
             // frmMain
             // 
@@ -458,16 +472,16 @@
             this.tabControl1.ResumeLayout(false);
             this.tabConsole.ResumeLayout(false);
             this.tabPorts.ResumeLayout(false);
+            this.grbCalibration.ResumeLayout(false);
+            this.grbCalibration.PerformLayout();
+            this.grbPortSetting.ResumeLayout(false);
+            this.grbPortSetting.PerformLayout();
             this.tabEncoding.ResumeLayout(false);
             this.grbEncoding.ResumeLayout(false);
             this.grbEncoding.PerformLayout();
             this.tabDecoding.ResumeLayout(false);
             this.grbDecoding.ResumeLayout(false);
             this.grbDecoding.PerformLayout();
-            this.grbPortSetting.ResumeLayout(false);
-            this.grbPortSetting.PerformLayout();
-            this.grbCalibration.ResumeLayout(false);
-            this.grbCalibration.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -510,6 +524,7 @@
         private System.Windows.Forms.Label lblZ;
         private System.Windows.Forms.TextBox txtA;
         private System.Windows.Forms.Label lblA;
+        private System.Windows.Forms.Button btnShowAlphabet;
     }
 }
 
