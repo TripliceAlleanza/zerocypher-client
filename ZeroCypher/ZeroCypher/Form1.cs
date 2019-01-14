@@ -90,7 +90,7 @@
             cobDecryptionType.DataSource = GetAlgorithms();
         }
         private string[] GetAlgorithms() {
-            return new[] { "cesare", "trasposizione", "testo"};
+            return new[] { "caesar", "transposition", "plain text"};
         }
 
         private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e) {
@@ -189,7 +189,7 @@
             if (/*type == "cesare" &&*/ GetAlgorithms().ToList().Find(x => x == type) != null) {
                 if (Ready) {
                     int n;
-                    if (type == "cesare" && int.TryParse(key, out n) || type == "trasposizione" && !int.TryParse(key, out n)) {
+                    if (type == "caesar" && int.TryParse(key, out n) || type == "transposition" && !int.TryParse(key, out n)) {
                         Packet pak = new Packet(msg, key, mode, type, "request");
                         pak.SetHashCode();
                         OutputBuffer.Add(pak);
